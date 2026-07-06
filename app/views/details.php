@@ -492,16 +492,25 @@
 					<canvas id="moisture-chart-{{ $plant->get('id') }}"></canvas>
 				</div>
 
+				<?php
+				$moisture_labels = [];
+				$moisture_values = [];
+				foreach ($moisture_readings as $r) {
+					$moisture_labels[] = "'" . date('Y-m-d', strtotime($r->get('taken_at'))) . "'";
+					$moisture_values[] = $r->get('value');
+				}
+				?>
+
 				<script>
 					(function() {
 						var ctx = document.getElementById('moisture-chart-{{ $plant->get('id') }}').getContext('2d');
 						new Chart(ctx, {
 							type: 'line',
 							data: {
-								labels: [{!! $moisture_readings->map(function($r) { return "'" . date('Y-m-d', strtotime($r->get('taken_at'))) . "'"; })->implode(',') !!}],
+								labels: [<?php echo implode(',', $moisture_labels); ?>],
 								datasets: [{
 									label: '{{ __('app.moisture_value') }}',
-									data: [{!! $moisture_readings->map(function($r) { return $r->get('value'); })->implode(',') !!}],
+									data: [<?php echo implode(',', $moisture_values); ?>],
 									borderColor: 'rgb(76, 135, 195)',
 									backgroundColor: 'rgba(76, 135, 195, 0.2)',
 									fill: true,
