@@ -11,6 +11,15 @@ class UpgradeModule {
      */
     private static function upgradeTo5dot9()
     {
+        MoistureReadingModel::raw('CREATE TABLE IF NOT EXISTS `@THIS` (
+            id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+            plant_id INT NOT NULL,
+            value INT NOT NULL,
+            taken_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            taken_by_user INT NOT NULL,
+            note TEXT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )');
     }
 
     /**
