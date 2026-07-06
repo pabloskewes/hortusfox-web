@@ -23,6 +23,7 @@ services:
       DB_USERNAME: user
       DB_PASSWORD: "${DB_PASSWORD}"
       DB_CHARSET: "utf8mb4"
+      AI_CHAT_SIDECAR_TOKEN: "${AI_CHAT_SIDECAR_TOKEN}"
     depends_on:
       - db
 

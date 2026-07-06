@@ -5,7 +5,7 @@
  *
  * In-app AI chat backed by the locked-down local pi sidecar.
  */
-class AiChatController extends BaseController {
+class Ai_chatController extends BaseController {
     const INDEX_LAYOUT = 'layout';
 
     public function __construct()
@@ -253,9 +253,12 @@ class AiChatController extends BaseController {
 
     private function serializeAction($row)
     {
-        $preview = json_decode($row->get('preview_json'), true);
-        $args = json_decode($row->get('args_json'), true);
-        $result = json_decode($row->get('result_json'), true);
+        $previewRaw = $row->get('preview_json');
+        $argsRaw = $row->get('args_json');
+        $resultRaw = $row->get('result_json');
+        $preview = ($previewRaw !== null) ? json_decode($previewRaw, true) : null;
+        $args = ($argsRaw !== null) ? json_decode($argsRaw, true) : null;
+        $result = ($resultRaw !== null) ? json_decode($resultRaw, true) : null;
         return [
             'id' => $row->get('id'),
             'session_id' => $row->get('session_id'),
