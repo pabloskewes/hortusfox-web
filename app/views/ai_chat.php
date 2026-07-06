@@ -31,27 +31,22 @@
 .ai-msg-time { font-size: 0.68rem; opacity: 0.45; margin-top: 0.25rem; padding: 0 0.2rem; }
 .is-user .ai-msg-time { text-align: right; }
 
-/* Markdown inside bubbles */
-.ai-bubble h1,.ai-bubble h2,.ai-bubble h3 { font-weight: 700; margin: 0.6rem 0 0.25rem; }
-.ai-bubble h1 { font-size: 1.08rem; }
-.ai-bubble h2 { font-size: 1rem; }
-.ai-bubble h3 { font-size: 0.93rem; }
-.ai-bubble p { margin: 0 0 0.5rem; }
-.ai-bubble p:last-child { margin-bottom: 0; }
-.ai-bubble ul,.ai-bubble ol { padding-left: 1.25rem; margin: 0.2rem 0 0.45rem; }
-.ai-bubble li { margin-bottom: 0.15rem; }
-.ai-bubble code { background: rgba(0,0,0,0.3); padding: 0.1em 0.38em; border-radius: 4px; font-size: 0.82rem; font-family: monospace; }
-.ai-bubble pre { background: rgba(0,0,0,0.35); padding: 0.75rem; border-radius: 8px; overflow-x: auto; margin: 0.45rem 0; }
-.ai-bubble pre code { background: none; padding: 0; }
-/* Tables scroll horizontally inside the bubble */
-.ai-bubble table { border-collapse: collapse; width: auto; min-width: 100%; margin: 0.45rem 0; font-size: 0.82rem; white-space: nowrap; }
-.ai-bubble th,.ai-bubble td { border: 1px solid rgba(255,255,255,0.15); padding: 0.3rem 0.6rem; }
-.ai-bubble th { background: rgba(255,255,255,0.07); font-weight: 600; }
-.ai-bubble blockquote { border-left: 3px solid #48c78e; margin: 0.4rem 0; padding: 0.25rem 0.75rem; opacity: 0.8; }
-.ai-bubble hr { border: none; border-top: 1px solid rgba(255,255,255,0.12); margin: 0.5rem 0; }
-.ai-bubble a { color: #48c78e; text-decoration: underline; }
-.is-user .ai-bubble code { background: rgba(0,0,0,0.15); }
-.is-user .ai-bubble a { color: #082016; }
+/* Markdown inside bot bubbles — use [style] attribute selector to scope to our inline-styled bubbles */
+.ai-from-bot p { margin: 0 0 0.5rem !important; color: #dde2ea !important; }
+.ai-from-bot p:last-child { margin-bottom: 0 !important; }
+.ai-from-bot h1,.ai-from-bot h2,.ai-from-bot h3 { font-weight: 700 !important; margin: 0.6rem 0 0.25rem !important; color: #dde2ea !important; }
+.ai-from-bot ul,.ai-from-bot ol { padding-left: 1.25rem !important; margin: 0.2rem 0 0.45rem !important; color: #dde2ea !important; }
+.ai-from-bot li { margin-bottom: 0.15rem !important; color: #dde2ea !important; }
+.ai-from-bot strong,.ai-from-bot em { color: #dde2ea !important; }
+.ai-from-bot code { background: rgba(0,0,0,0.35) !important; color: #e0e0e0 !important; padding: 0.1em 0.38em !important; border-radius: 4px !important; font-size: 0.82rem !important; font-family: monospace !important; }
+.ai-from-bot pre { background: rgba(0,0,0,0.4) !important; padding: 0.75rem !important; border-radius: 8px !important; overflow-x: auto !important; margin: 0.45rem 0 !important; }
+.ai-from-bot pre code { background: none !important; padding: 0 !important; }
+.ai-from-bot table { border-collapse: collapse !important; width: auto !important; min-width: 100% !important; margin: 0.45rem 0 !important; font-size: 0.82rem !important; white-space: nowrap !important; }
+.ai-from-bot th,.ai-from-bot td { border: 1px solid rgba(255,255,255,0.15) !important; padding: 0.3rem 0.65rem !important; color: #dde2ea !important; }
+.ai-from-bot th { background: rgba(255,255,255,0.08) !important; font-weight: 600 !important; }
+.ai-from-bot blockquote { border-left: 3px solid #48c78e !important; margin: 0.4rem 0 !important; padding: 0.25rem 0.75rem !important; opacity: 0.85 !important; }
+.ai-from-bot hr { border: none !important; border-top: 1px solid rgba(255,255,255,0.12) !important; margin: 0.5rem 0 !important; }
+.ai-from-bot a { color: #7ec8a0 !important; text-decoration: underline !important; }
 
 /* Pending action card */
 .ai-action-card { margin: 0.25rem 0 0 calc(30px + 0.6rem); border: 1px solid #ffdd57; border-radius: 10px; padding: 0.85rem 1rem; background: rgba(255,221,87,0.09); max-width: calc(78% + 30px + 0.6rem); }
@@ -268,18 +263,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
         messages.forEach(function(msg) {
             const isUser = msg.role === 'user';
+
             const row = document.createElement('div');
-            row.className = 'ai-msg-row ' + (isUser ? 'is-user' : 'is-assistant');
+            row.className = 'ai-msg-row ' + (isUser ? 'ai-from-user' : 'ai-from-bot');
+            row.style.cssText = 'display:flex;align-items:flex-start;gap:0.65rem;' + (isUser ? 'flex-direction:row-reverse;' : '');
 
             const avatar = document.createElement('div');
-            avatar.className = 'ai-avatar ' + (isUser ? 'ai-avatar-user' : 'ai-avatar-bot');
+            avatar.style.cssText = 'width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.8rem;flex-shrink:0;margin-top:2px;' + (isUser ? 'background:#48c78e;color:#082016;' : 'background:#3d4350;color:#8ab4f8;border:1px solid rgba(255,255,255,0.15);');
             avatar.innerHTML = '<i class="fas ' + (isUser ? 'fa-user' : 'fa-seedling') + '"></i>';
 
             const wrap = document.createElement('div');
-            wrap.className = 'ai-bubble-wrap';
+            wrap.style.cssText = 'max-width:78%;min-width:0;';
 
             const bubble = document.createElement('div');
-            bubble.className = 'ai-bubble';
+            bubble.style.cssText = 'padding:0.85rem 1.1rem;border-radius:16px;font-size:0.93rem;line-height:1.65;overflow-x:auto;' + (isUser ? 'background:#48c78e;color:#082016;border-bottom-right-radius:3px;word-break:break-word;' : 'background:#2e3340;color:#dde2ea;border-bottom-left-radius:3px;border:1px solid rgba(255,255,255,0.08);');
             if (isUser) {
                 bubble.textContent = msg.content;
             } else {
@@ -288,6 +285,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const time = document.createElement('div');
             time.className = 'ai-msg-time';
+            time.style.cssText = 'font-size:0.68rem;opacity:0.45;margin-top:0.25rem;padding:0 0.2rem;' + (isUser ? 'text-align:right;' : '');
             time.textContent = msg.diffForHumans || '';
 
             wrap.appendChild(bubble);
