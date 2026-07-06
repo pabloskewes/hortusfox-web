@@ -118,6 +118,14 @@ return [
     array('/chat/messages/count', 'ANY', 'chat@get_message_count'),
     array('/chat/system/message/latest', 'ANY', 'chat@get_latest_system_message'),
 
+    /** AI Chat Controller */
+    array('/ai-chat', 'GET', 'ai_chat@view_chat'),
+    array('/ai-chat/sessions', 'GET', 'ai_chat@sessions'),
+    array('/ai-chat/messages', 'GET', 'ai_chat@messages'),
+    array('/ai-chat/send', 'POST', 'ai_chat@send_message'),
+    array('/ai-chat/action/approve', 'POST', 'ai_chat@approve_action'),
+    array('/ai-chat/action/reject', 'POST', 'ai_chat@reject_action'),
+
     /** Admin Controller */
     array('/admin', 'GET', 'admin@index'),
     array('/admin/environment/save', 'POST', 'admin@save_environment'),

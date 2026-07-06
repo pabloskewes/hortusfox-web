@@ -2,6 +2,11 @@
 /app/migrations/migrations.list
 /app/migrations/verhist.json
 /app/config/openplantbook.json
+/app/config/ai_chat.json
+/ai-chat/.env
+/ai-chat/.pi-agent
+/ai-chat/node_modules
+/ai-chat/dist
 /vendor
 /node_modules
 /.idea

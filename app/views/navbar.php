@@ -74,7 +74,15 @@
                 </a>
             </div>
             @endif
-            
+
+            @if (AiChatConfigModule::isEnabled())
+            <div class="navbar-item">
+                <a href="{{ url('/ai-chat') }}">
+                    <i class="fas fa-seedling" title="{{ __('app.ai_chat') }}"></i><span class="navbar-item-only-mobile">&nbsp;{{ __('app.ai_chat') }}</span>
+                </a>
+            </div>
+            @endif
+             
             @if (app('history_enable'))
             <div class="navbar-item">
                 <a href="{{ url('/plants/history') }}">

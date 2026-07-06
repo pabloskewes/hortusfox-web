@@ -9,6 +9,44 @@ class UpgradeModule {
     /**
      * @return void
      */
+    private static function upgradeTo5dot11()
+    {
+        AiChatSessionModel::raw('CREATE TABLE IF NOT EXISTS `@THIS` (
+            id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+            user_id INT NOT NULL,
+            title VARCHAR(255) NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )');
+
+        AiChatMsgModel::raw('CREATE TABLE IF NOT EXISTS `@THIS` (
+            id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+            session_id INT NOT NULL,
+            role VARCHAR(32) NOT NULL,
+            content LONGTEXT NOT NULL,
+            metadata_json LONGTEXT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )');
+
+        AiChatActionModel::raw('CREATE TABLE IF NOT EXISTS `@THIS` (
+            id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+            session_id INT NOT NULL,
+            message_id INT NOT NULL,
+            user_id INT NOT NULL,
+            tool_name VARCHAR(128) NOT NULL,
+            args_json LONGTEXT NOT NULL,
+            preview_json LONGTEXT NOT NULL,
+            status VARCHAR(32) NOT NULL,
+            result_json LONGTEXT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            executed_at DATETIME NULL
+        )');
+    }
+
+    /**
+     * @return void
+     */
     private static function upgradeTo5dot10()
     {
         SpeciesInfoCacheModel::raw('CREATE TABLE IF NOT EXISTS `@THIS` (

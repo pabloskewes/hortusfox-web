@@ -1,0 +1,26 @@
+{
+  "enabled": true,
+  "sidecar_url": "http://127.0.0.1:8787",
+  "sidecar_token_env": "AI_CHAT_SIDECAR_TOKEN",
+  "model": "opencode-go/deepseek-v4-pro",
+  "thinking_level": "off",
+  "allowed_tools": [
+    "list_locations",
+    "list_plants",
+    "get_plant",
+    "search_plants",
+    "list_tasks",
+    "list_moisture_readings",
+    "get_species_info",
+    "add_plant",
+    "update_plant",
+    "add_task",
+    "add_moisture_reading"
+  ],
+  "mutation_tools": [
+    "add_plant",
+    "update_plant",
+    "add_task",
+    "add_moisture_reading"
+  ]
+}
