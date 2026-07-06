@@ -480,6 +480,133 @@
 	</div>
 </div>
 
+<div class="columns plant-column">
+	<div class="column is-full">
+		<div class="plant-moisture">
+			<div class="plant-moisture-title">{{ __('app.moisture_readings') }}</div>
+
+			<a name="plant-moisture-anchor"></a>
+
+			@if ((is_countable($moisture_readings)) && (count($moisture_readings) > 0))
+				<div class="plant-moisture-chart" style="margin-bottom: 1.5rem;">
+					<canvas id="moisture-chart-{{ $plant->get('id') }}"></canvas>
+				</div>
+
+				<script>
+					(function() {
+						var ctx = document.getElementById('moisture-chart-{{ $plant->get('id') }}').getContext('2d');
+						new Chart(ctx, {
+							type: 'line',
+							data: {
+								labels: [{!! $moisture_readings->map(function($r) { return "'" . date('Y-m-d', strtotime($r->get('taken_at'))) . "'"; })->implode(',') !!}],
+								datasets: [{
+									label: '{{ __('app.moisture_value') }}',
+									data: [{!! $moisture_readings->map(function($r) { return $r->get('value'); })->implode(',') !!}],
+									borderColor: 'rgb(76, 135, 195)',
+									backgroundColor: 'rgba(76, 135, 195, 0.2)',
+									fill: true,
+									tension: 0.2
+								}]
+							},
+							options: {
+								responsive: true,
+								scales: {
+									y: {
+										min: 1,
+										max: 9,
+										ticks: {
+											stepSize: 1
+										}
+									}
+								}
+							}
+						});
+					})();
+				</script>
+
+				<div class="table-scroll-horizontally">
+					<table>
+						<thead>
+							<tr>
+								<td>{{ __('app.moisture_value') }}</td>
+								<td>{{ __('app.moisture_date') }}</td>
+								<td>{{ __('app.moisture_note') }}</td>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach ($moisture_readings as $reading)
+								<tr>
+									<td><strong>{{ $reading->get('value') }}</strong></td>
+									<td>{{ date('Y-m-d H:i', strtotime($reading->get('taken_at'))) }}</td>
+									<td>{{ $reading->get('note') ?? '-' }}</td>
+								</tr>
+							@endforeach
+						</tbody>
+					</table>
+				</div>
+			@else
+				<strong>{{ __('app.no_moisture_readings_yet') }}</strong>
+			@endif
+
+			<form method="POST" action="{{ url('/plants/moisture/add') }}" class="plant-moisture-form" style="margin-top: 1rem;">
+				@csrf
+
+				<input type="hidden" name="plant" value="{{ $plant->get('id') }}"/>
+
+				<div class="field is-horizontal">
+					<div class="field-label is-normal">
+						<label class="label">{{ __('app.moisture_value') }} (1-9)</label>
+					</div>
+					<div class="field-body">
+						<div class="field">
+							<div class="control">
+								<input class="input" type="number" name="value" min="1" max="9" required style="max-width: 120px;"/>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="field is-horizontal">
+					<div class="field-label is-normal">
+						<label class="label">{{ __('app.moisture_date') }}</label>
+					</div>
+					<div class="field-body">
+						<div class="field">
+							<div class="control">
+								<input class="input" type="datetime-local" name="taken_at" style="max-width: 250px;"/>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="field is-horizontal">
+					<div class="field-label is-normal">
+						<label class="label">{{ __('app.moisture_note') }}</label>
+					</div>
+					<div class="field-body">
+						<div class="field">
+							<div class="control">
+								<input class="input" type="text" name="note" placeholder="{{ __('app.moisture_note_placeholder') }}"/>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="field is-horizontal">
+					<div class="field-label"></div>
+					<div class="field-body">
+						<div class="control">
+							<button class="button is-info" type="submit">{{ __('app.add_moisture_reading') }}</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+
 
 <div class="columns plant-column">
 	<div class="column is-full plant-button-group">

@@ -202,6 +202,7 @@ class PlantsController extends BaseController {
 		$photos = PlantPhotoModel::getPlantGallery($plant_id);
 		$custom_attributes = CustPlantAttrModel::getForPlant($plant_id);
 		$plant_log_entries = PlantLogModel::getLogEntries($plant_id);
+		$moisture_readings = MoistureReadingModel::getForPlant($plant_id, 100, 'asc');
 
 		$plant_tasks = [];
 		$plant_task_refs = PlantTasksRefModel::getForPlant($plant_id);
@@ -227,6 +228,7 @@ class PlantsController extends BaseController {
 			'custom_attributes' => $custom_attributes,
 			'plant_tasks' => $plant_tasks,
 			'plant_log_entries' => $plant_log_entries,
+			'moisture_readings' => $moisture_readings,
 			'offspring' => $offspring,
 			'edit_user_name' => $edit_user_name,
 			'edit_user_when' => $edit_user_when
@@ -263,6 +265,42 @@ class PlantsController extends BaseController {
 		$plant_id = PlantsModel::addPlant($name, $location);
 
 		return redirect('/plants/details/' . $plant_id);
+	}
+
+	/**
+	 * Handles URL: /plants/moisture/add
+	 * 
+	 * @param Asatru\Controller\ControllerArg $request
+	 * @return Asatru\View\RedirectHandler
+	 */
+	public function add_moisture_reading($request)
+	{
+		$validator = new Asatru\Controller\PostValidator([
+			'plant' => 'required',
+			'value' => 'required'
+		]);
+
+		if (!$validator->isValid()) {
+			$errorstr = '';
+			foreach ($validator->errorMsgs() as $err) {
+				$errorstr .= $err . '<br/>';
+			}
+
+			FlashMessage::setMsg('error', 'Invalid data given:<br/>' . $errorstr);
+			
+			return back();
+		}
+
+		$plantId = $request->params()->query('plant', null);
+		$value = (int)$request->params()->query('value', null);
+		$note = $request->params()->query('note', null);
+		$takenAt = $request->params()->query('taken_at', null);
+
+		MoistureReadingModel::addReading($plantId, $value, $note, $takenAt, false);
+
+		FlashMessage::setMsg('success', __('app.moisture_reading_added'));
+
+		return redirect('/plants/details/' . $plantId . '#plant-moisture-anchor');
 	}
 
 	/**

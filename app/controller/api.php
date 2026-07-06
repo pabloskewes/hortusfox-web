@@ -1137,4 +1137,83 @@ class ApiController extends BaseController {
             ]);
         }
     }
+
+    /**
+	 * Handles URL: /api/moisture/add
+	 * 
+	 * @param Asatru\Controller\ControllerArg $request
+	 * @return Asatru\View\JsonHandler
+	 */
+    public function add_moisture_reading($request)
+    {
+        try {
+            $plantId = $request->params()->query('plant', null);
+            $value = (int)$request->params()->query('value', null);
+            $user = (int)$request->params()->query('user', null);
+            $note = $request->params()->query('note', null);
+            $takenAt = $request->params()->query('taken_at', null);
+
+            $readingId = MoistureReadingModel::addReading($plantId, $value, $note, $takenAt, true, $user);
+
+            return json([
+                'code' => 200,
+                'reading' => $readingId
+            ]);
+        } catch (\Exception $e) {
+            return json([
+                'code' => 500,
+                'msg' => $e->getMessage()
+            ]);
+        }
+    }
+
+    /**
+	 * Handles URL: /api/moisture/fetch
+	 * 
+	 * @param Asatru\Controller\ControllerArg $request
+	 * @return Asatru\View\JsonHandler
+	 */
+    public function fetch_moisture_readings($request)
+    {
+        try {
+            $plantId = $request->params()->query('plant', null);
+            $limit = $request->params()->query('limit', null);
+
+            $readings = MoistureReadingModel::getForPlant($plantId, $limit, 'desc');
+
+            return json([
+                'code' => 200,
+                'readings' => $readings?->asArray()
+            ]);
+        } catch (\Exception $e) {
+            return json([
+                'code' => 500,
+                'msg' => $e->getMessage()
+            ]);
+        }
+    }
+
+    /**
+	 * Handles URL: /api/moisture/remove
+	 * 
+	 * @param Asatru\Controller\ControllerArg $request
+	 * @return Asatru\View\JsonHandler
+	 */
+    public function remove_moisture_reading($request)
+    {
+        try {
+            $id = $request->params()->query('id', null);
+
+            MoistureReadingModel::removeReading($id);
+
+            return json([
+                'code' => 200
+            ]);
+        } catch (\Exception $e) {
+            return json([
+                'code' => 500,
+                'msg' => $e->getMessage()
+            ]);
+        }
+    }
 }

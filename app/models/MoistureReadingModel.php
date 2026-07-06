@@ -34,17 +34,24 @@ class MoistureReadingModel extends \Asatru\Database\Model {
      * @return int
      * @throws \Exception
      */
-    public static function addReading($plantId, $value, $note = null, $takenAt = null, $api = false)
+    public static function addReading($plantId, $value, $note = null, $takenAt = null, $api = false, $takenByUser = null)
     {
         try {
             static::validateValue($value);
 
-            $user = null;
-            if (!$api) {
+            $userId = null;
+            if ($takenByUser !== null) {
+                $userId = (int)$takenByUser;
+            } else if (!$api) {
                 $user = UserModel::getAuthUser();
                 if (!$user) {
                     throw new \Exception('Invalid user');
                 }
+                $userId = $user->get('id');
+            }
+
+            if ($userId === null) {
+                throw new \Exception('taken_by_user is required');
             }
 
             if ($takenAt === null) {
@@ -52,7 +59,7 @@ class MoistureReadingModel extends \Asatru\Database\Model {
             }
 
             static::raw('INSERT INTO `@THIS` (plant_id, value, taken_at, taken_by_user, note) VALUES(?, ?, ?, ?, ?)', [
-                $plantId, $value, $takenAt, $user?->get('id'), $note
+                $plantId, $value, $takenAt, $userId, $note
             ]);
 
             $query = static::raw('SELECT * FROM `@THIS` ORDER BY id DESC LIMIT 1')->first();

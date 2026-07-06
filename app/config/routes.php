@@ -60,6 +60,7 @@ return [
     array('/plants/log/edit', 'POST', 'plants@edit_plant_log_entry'),
     array('/plants/log/remove', 'POST', 'plants@remove_plant_log_entry'),
     array('/plants/log/fetch', 'ANY', 'plants@fetch_plant_log_entries'),
+    array('/plants/moisture/add', 'POST', 'plants@add_moisture_reading'),
     array('/plants/location/log/add', 'POST', 'plants@add_location_log_entry'),
     array('/plants/location/log/edit', 'POST', 'plants@edit_location_log_entry'),
     array('/plants/location/log/remove', 'POST', 'plants@remove_location_log_entry'),
@@ -206,6 +207,11 @@ return [
     array('/api/chat/message/add', 'ANY', 'api@add_chat_message'),
     array('/api/backup/export', 'ANY', 'api@export_backup'),
     array('/api/backup/import', 'POST', 'api@import_backup'),
+
+    /** Moisture Reading Controller */
+    array('/api/moisture/add', 'ANY', 'api@add_moisture_reading'),
+    array('/api/moisture/fetch', 'ANY', 'api@fetch_moisture_readings'),
+    array('/api/moisture/remove', 'ANY', 'api@remove_moisture_reading'),
 
     /** Backup Controller */
     array('/export/start', 'POST', 'backup@export'),
