@@ -6,6 +6,7 @@ services:
     ports:
       - "8080:80"
     volumes:
+      - ./public:/var/www/html/public
       - app_images:/var/www/html/public/img
       - app_logs:/var/www/html/app/logs
       - app_backup:/var/www/html/public/backup
