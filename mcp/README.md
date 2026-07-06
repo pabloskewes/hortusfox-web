@@ -81,6 +81,18 @@ The inspector opens a web UI where you can list tools, call them one at a
 time, and inspect raw JSON-RPC. Useful when a tool fails and you want to see
 the exact request/response.
 
+## Dev probe (CLI smoke test, no browser)
+
+`scripts/probe.ts` spawns the server via the SDK's stdio client and runs
+a fixed battery of calls (list tools, list locations/plants/readings, plus
+two error cases). No browser, no UI, just stdout. Useful for CI or quick
+sanity checks.
+
+```sh
+cd mcp
+npx tsx scripts/probe.ts
+```
+
 ## Configuration
 
 `mcp/.env` (gitignored):

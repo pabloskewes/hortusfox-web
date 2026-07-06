@@ -1,5 +1,6 @@
 import { config } from "./config.js";
 import { HortusFoxApiError, HortusFoxHttpError } from "./errors.js";
+import { cleanApiResponse } from "./cleaner.js";
 
 export type QueryValue = string | number | boolean | undefined | null;
 
@@ -85,5 +86,5 @@ async function apiFetch<T>(url: URL, init: RequestInit): Promise<T> {
         );
     }
 
-    return body as T;
+    return cleanApiResponse(body as T);
 }
