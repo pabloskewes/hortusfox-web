@@ -37,7 +37,8 @@
 .ai-from-bot h1,.ai-from-bot h2,.ai-from-bot h3 { font-weight: 700 !important; margin: 0.6rem 0 0.25rem !important; color: #dde2ea !important; }
 .ai-from-bot ul,.ai-from-bot ol { padding-left: 1.25rem !important; margin: 0.2rem 0 0.45rem !important; color: #dde2ea !important; }
 .ai-from-bot li { margin-bottom: 0.15rem !important; color: #dde2ea !important; }
-.ai-from-bot strong,.ai-from-bot em { color: #dde2ea !important; }
+.ai-from-bot strong { color: #ffffff !important; font-weight: 700 !important; }
+.ai-from-bot em { color: #c8d8f0 !important; font-style: italic !important; }
 .ai-from-bot code { background: rgba(0,0,0,0.35) !important; color: #e0e0e0 !important; padding: 0.1em 0.38em !important; border-radius: 4px !important; font-size: 0.82rem !important; font-family: monospace !important; }
 .ai-from-bot pre { background: rgba(0,0,0,0.4) !important; padding: 0.75rem !important; border-radius: 8px !important; overflow-x: auto !important; margin: 0.45rem 0 !important; }
 .ai-from-bot pre code { background: none !important; padding: 0 !important; }
