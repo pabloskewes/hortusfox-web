@@ -19,34 +19,35 @@
 .ai-msg-row.is-user { flex-direction: row-reverse; }
 
 /* Avatar */
-.ai-avatar { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; flex-shrink: 0; margin-top: 2px; }
+.ai-avatar { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; flex-shrink: 0; margin-top: 2px; }
 .ai-avatar-user { background: #48c78e; color: #082016; }
-.ai-avatar-bot { background: rgba(255,255,255,0.1); color: #aaa; }
+.ai-avatar-bot { background: #3d4350; color: #8ab4f8; border: 1px solid rgba(255,255,255,0.12); }
 
-/* Bubble */
-.ai-bubble-wrap { max-width: 78%; }
-.ai-bubble { padding: 0.7rem 0.95rem; border-radius: 14px; font-size: 0.88rem; line-height: 1.6; word-break: break-word; }
-.is-user .ai-bubble { background: #48c78e; color: #082016; border-bottom-right-radius: 3px; }
-.is-assistant .ai-bubble { background: rgba(255,255,255,0.08); color: #e4e4e4; border-bottom-left-radius: 3px; }
-.ai-msg-time { font-size: 0.67rem; opacity: 0.45; margin-top: 0.2rem; padding: 0 0.2rem; }
+/* Bubble — min-width:0 lets flex children shrink so tables don't blow out the row */
+.ai-bubble-wrap { max-width: 80%; min-width: 0; }
+.ai-bubble { padding: 0.85rem 1.05rem; border-radius: 16px; font-size: 0.93rem; line-height: 1.65; overflow-x: auto; }
+.is-user .ai-bubble { background: #48c78e; color: #082016; border-bottom-right-radius: 3px; word-break: break-word; }
+.is-assistant .ai-bubble { background: #2e3340; color: #dde2ea; border-bottom-left-radius: 3px; border: 1px solid rgba(255,255,255,0.07); }
+.ai-msg-time { font-size: 0.68rem; opacity: 0.45; margin-top: 0.25rem; padding: 0 0.2rem; }
 .is-user .ai-msg-time { text-align: right; }
 
-/* Markdown inside assistant bubble */
-.ai-bubble h1,.ai-bubble h2,.ai-bubble h3 { font-weight: 700; margin: 0.5rem 0 0.2rem; }
-.ai-bubble h1 { font-size: 1.05rem; }
-.ai-bubble h2 { font-size: 0.97rem; }
-.ai-bubble h3 { font-size: 0.9rem; }
-.ai-bubble p { margin: 0 0 0.45rem; }
+/* Markdown inside bubbles */
+.ai-bubble h1,.ai-bubble h2,.ai-bubble h3 { font-weight: 700; margin: 0.6rem 0 0.25rem; }
+.ai-bubble h1 { font-size: 1.08rem; }
+.ai-bubble h2 { font-size: 1rem; }
+.ai-bubble h3 { font-size: 0.93rem; }
+.ai-bubble p { margin: 0 0 0.5rem; }
 .ai-bubble p:last-child { margin-bottom: 0; }
-.ai-bubble ul,.ai-bubble ol { padding-left: 1.2rem; margin: 0.2rem 0 0.4rem; }
-.ai-bubble li { margin-bottom: 0.1rem; }
-.ai-bubble code { background: rgba(0,0,0,0.28); padding: 0.1em 0.35em; border-radius: 4px; font-size: 0.8rem; font-family: monospace; }
-.ai-bubble pre { background: rgba(0,0,0,0.35); padding: 0.7rem; border-radius: 8px; overflow-x: auto; margin: 0.4rem 0; }
+.ai-bubble ul,.ai-bubble ol { padding-left: 1.25rem; margin: 0.2rem 0 0.45rem; }
+.ai-bubble li { margin-bottom: 0.15rem; }
+.ai-bubble code { background: rgba(0,0,0,0.3); padding: 0.1em 0.38em; border-radius: 4px; font-size: 0.82rem; font-family: monospace; }
+.ai-bubble pre { background: rgba(0,0,0,0.35); padding: 0.75rem; border-radius: 8px; overflow-x: auto; margin: 0.45rem 0; }
 .ai-bubble pre code { background: none; padding: 0; }
-.ai-bubble table { border-collapse: collapse; width: 100%; margin: 0.4rem 0; font-size: 0.8rem; }
-.ai-bubble th,.ai-bubble td { border: 1px solid rgba(255,255,255,0.14); padding: 0.28rem 0.55rem; }
-.ai-bubble th { background: rgba(255,255,255,0.08); font-weight: 600; }
-.ai-bubble blockquote { border-left: 3px solid #48c78e; margin: 0.35rem 0; padding: 0.2rem 0.7rem; opacity: 0.8; }
+/* Tables scroll horizontally inside the bubble */
+.ai-bubble table { border-collapse: collapse; width: auto; min-width: 100%; margin: 0.45rem 0; font-size: 0.82rem; white-space: nowrap; }
+.ai-bubble th,.ai-bubble td { border: 1px solid rgba(255,255,255,0.15); padding: 0.3rem 0.6rem; }
+.ai-bubble th { background: rgba(255,255,255,0.07); font-weight: 600; }
+.ai-bubble blockquote { border-left: 3px solid #48c78e; margin: 0.4rem 0; padding: 0.25rem 0.75rem; opacity: 0.8; }
 .ai-bubble hr { border: none; border-top: 1px solid rgba(255,255,255,0.12); margin: 0.5rem 0; }
 .ai-bubble a { color: #48c78e; text-decoration: underline; }
 .is-user .ai-bubble code { background: rgba(0,0,0,0.15); }
