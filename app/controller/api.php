@@ -1216,4 +1216,66 @@ class ApiController extends BaseController {
             ]);
         }
     }
+
+    /**
+	 * Handles URL: /api/species/info
+	 *
+	 * Cache-first lookup of plant species care data (watering, light,
+	 * humidity, soil, temperature) from the OpenPlantBook source. First
+	 * call per species fetches from upstream and caches for 30 days;
+	 * subsequent calls return the cached data.
+	 *
+	 * @param Asatru\Controller\ControllerArg $request
+	 * @return Asatru\View\JsonHandler
+	 */
+    public function species_info($request)
+    {
+        try {
+            $rawName = $request->params()->query('scientific_name', null);
+            if (!$rawName) {
+                return json([
+                    'code' => 400,
+                    'msg' => 'scientific_name query parameter is required'
+                ]);
+            }
+
+            $normalized = SpeciesInfoCacheModel::normalizeName($rawName);
+            $source = SpeciesInfoCacheModel::SOURCE_OPENPLANTBOOK;
+
+            $cached = SpeciesInfoCacheModel::find($source, $normalized);
+            if ($cached && SpeciesInfoCacheModel::isFresh($cached)) {
+                return json([
+                    'code' => 200,
+                    'cache' => 'hit',
+                    'scientific_name' => $normalized,
+                    'source' => $source,
+                    'fetched_at' => $cached->get('fetched_at'),
+                    'expires_at' => $cached->get('expires_at'),
+                    'data' => json_decode($cached->get('data_json'), true)
+                ]);
+            }
+
+            $cacheState = $cached ? 'stale' : 'miss';
+            $data = OpenPlantBookModule::fetchSpecies($normalized, true);
+            $jsonString = json_encode($data);
+
+            SpeciesInfoCacheModel::put($source, $normalized, $jsonString, SpeciesInfoCacheModel::DEFAULT_TTL_DAYS);
+
+            $fresh = SpeciesInfoCacheModel::find($source, $normalized);
+            return json([
+                'code' => 200,
+                'cache' => $cacheState,
+                'scientific_name' => $normalized,
+                'source' => $source,
+                'fetched_at' => $fresh?->get('fetched_at'),
+                'expires_at' => $fresh?->get('expires_at'),
+                'data' => $data
+            ]);
+        } catch (\Exception $e) {
+            return json([
+                'code' => 500,
+                'msg' => $e->getMessage()
+            ]);
+        }
+    }
 }

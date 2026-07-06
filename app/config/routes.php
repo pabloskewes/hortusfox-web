@@ -213,6 +213,9 @@ return [
     array('/api/moisture/fetch', 'ANY', 'api@fetch_moisture_readings'),
     array('/api/moisture/remove', 'ANY', 'api@remove_moisture_reading'),
 
+    /** Species Info Cache Controller */
+    array('/api/species/info', 'ANY', 'api@species_info'),
+
     /** Backup Controller */
     array('/export/start', 'POST', 'backup@export'),
     array('/import/start', 'POST', 'backup@import'),
