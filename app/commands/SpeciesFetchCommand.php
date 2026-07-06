@@ -40,7 +40,7 @@ class SpeciesFetchCommand implements Asatru\Commands\Command {
             }
         }
 
-        $cached = SpeciesInfoCacheModel::find($source, $normalized);
+        $cached = SpeciesInfoCacheModel::findBySpecies($source, $normalized);
         if ($cached && !$force && SpeciesInfoCacheModel::isFresh($cached)) {
             echo "Already cached for '{$normalized}' (fetched_at={$cached->get('fetched_at')}, expires_at={$cached->get('expires_at')}). Pass --force to refresh.\n";
             return;
@@ -51,7 +51,7 @@ class SpeciesFetchCommand implements Asatru\Commands\Command {
             echo "{$label} from OpenPlantBook: {$normalized}\n";
             $data = OpenPlantBookModule::fetchSpecies($normalized, true);
             SpeciesInfoCacheModel::put($source, $normalized, json_encode($data), SpeciesInfoCacheModel::DEFAULT_TTL_DAYS);
-            $fresh = SpeciesInfoCacheModel::find($source, $normalized);
+            $fresh = SpeciesInfoCacheModel::findBySpecies($source, $normalized);
             echo "Cached. fetched_at={$fresh->get('fetched_at')}, expires_at={$fresh->get('expires_at')}.\n";
         } catch (\Exception $e) {
             echo "Error: " . $e->getMessage() . "\n";

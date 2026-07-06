@@ -24,7 +24,7 @@ class SpeciesInfoCacheModel extends \Asatru\Database\Model {
      * @param string $scientificName Normalized (lowercase, trimmed)
      * @return mixed Row or null
      */
-    public static function find($source, $scientificName)
+    public static function findBySpecies($source, $scientificName)
     {
         try {
             return static::raw(
@@ -51,7 +51,7 @@ class SpeciesInfoCacheModel extends \Asatru\Database\Model {
             $now = date('Y-m-d H:i:s');
             $expires = date('Y-m-d H:i:s', time() + ((int)$ttlDays) * 86400);
 
-            $existing = static::find($source, $scientificName);
+            $existing = static::findBySpecies($source, $scientificName);
             if ($existing) {
                 static::raw(
                     'UPDATE `@THIS` SET data_json = ?, fetched_at = ?, expires_at = ? WHERE id = ?',

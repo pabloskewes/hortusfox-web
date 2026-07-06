@@ -1242,7 +1242,7 @@ class ApiController extends BaseController {
             $normalized = SpeciesInfoCacheModel::normalizeName($rawName);
             $source = SpeciesInfoCacheModel::SOURCE_OPENPLANTBOOK;
 
-            $cached = SpeciesInfoCacheModel::find($source, $normalized);
+            $cached = SpeciesInfoCacheModel::findBySpecies($source, $normalized);
             if ($cached && SpeciesInfoCacheModel::isFresh($cached)) {
                 return json([
                     'code' => 200,

@@ -14,9 +14,28 @@
  */
 class OpenPlantBookModule {
     const API_BASE = 'https://open.plantbook.io/api/v1/';
-    const CONFIG_PATH = 'app/config/openplantbook.json';
-    const TOKEN_CACHE_PATH = 'cache/openplantbook_token.json';
     const REQUEST_TIMEOUT_SECONDS = 15;
+
+    /**
+     * Absolute path to the project root. Resolved from this file's
+     * location so paths work regardless of the calling process's cwd
+     * (Apache serves from /var/www/html/public/, the CLI runs from
+     * /var/www/html/, so relative paths are not safe).
+     */
+    private static function projectRoot()
+    {
+        return dirname(__DIR__, 2);
+    }
+
+    private static function configPath()
+    {
+        return self::projectRoot() . '/app/config/openplantbook.json';
+    }
+
+    private static function tokenCachePath()
+    {
+        return self::projectRoot() . '/cache/openplantbook_token.json';
+    }
 
     /**
      * Fetch a species detail record from OpenPlantBook. Returns the raw
@@ -67,7 +86,7 @@ class OpenPlantBookModule {
      */
     public static function getConfig()
     {
-        $path = static::CONFIG_PATH;
+        $path = static::configPath();
         if (!file_exists($path)) {
             throw new \Exception(
                 'OpenPlantBook credentials not configured. ' .
@@ -109,7 +128,7 @@ class OpenPlantBookModule {
 
     private static function readTokenCache()
     {
-        $path = static::TOKEN_CACHE_PATH;
+        $path = static::tokenCachePath();
         if (!file_exists($path)) {
             return null;
         }
@@ -123,7 +142,7 @@ class OpenPlantBookModule {
 
     private static function writeTokenCache($accessToken, $expiresInSeconds)
     {
-        $path = static::TOKEN_CACHE_PATH;
+        $path = static::tokenCachePath();
         $dir = dirname($path);
         if (!is_dir($dir)) {
             @mkdir($dir, 0755, true);
@@ -137,7 +156,7 @@ class OpenPlantBookModule {
 
     private static function clearTokenCache()
     {
-        $path = static::TOKEN_CACHE_PATH;
+        $path = static::tokenCachePath();
         if (file_exists($path)) {
             @unlink($path);
         }
