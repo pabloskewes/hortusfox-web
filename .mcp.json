@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "hortusfox": {
+      "command": "npx",
+      "args": ["tsx", "src/server.ts"],
+      "cwd": "mcp"
+    }
+  }
+}
