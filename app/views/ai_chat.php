@@ -1,23 +1,81 @@
 <style>
-    .ai-chat-shell { min-height: 68vh; }
-    .ai-chat-sessions { border-right: 1px solid rgba(127, 127, 127, 0.2); }
-    .ai-chat-session { display: block; padding: 0.75rem; border-radius: 8px; color: inherit; }
-    .ai-chat-session:hover, .ai-chat-session.is-active { background: rgba(127, 127, 127, 0.12); }
-    .ai-chat-thread { min-height: 48vh; max-height: 62vh; overflow-y: auto; padding: 1rem; border-radius: 10px; background: rgba(127, 127, 127, 0.08); }
-    .ai-chat-bubble { max-width: 86%; margin-bottom: 1rem; padding: 0.85rem 1rem; border-radius: 14px; white-space: pre-wrap; }
-    .ai-chat-bubble-user { margin-left: auto; background: #48c78e; color: #082016; }
-    .ai-chat-bubble-assistant { margin-right: auto; background: rgba(255, 255, 255, 0.9); color: #1f2933; }
-    .ai-chat-action { margin: 0.75rem 0 1rem 0; border: 1px solid #ffdd57; border-radius: 10px; padding: 1rem; background: rgba(255, 221, 87, 0.12); }
-    .ai-chat-action-fields { margin-top: 0.75rem; }
-    .ai-chat-action-field { display: flex; gap: 0.5rem; margin-bottom: 0.25rem; }
-    .ai-chat-action-field strong { min-width: 9rem; }
-    .ai-chat-empty { padding: 2rem; text-align: center; opacity: 0.75; }
-    @media (max-width: 768px) {
-        .ai-chat-sessions { border-right: 0; border-bottom: 1px solid rgba(127, 127, 127, 0.2); margin-bottom: 1rem; }
-        .ai-chat-bubble { max-width: 96%; }
-        .ai-chat-thread { max-height: 55vh; }
-    }
+.ai-chat-shell { min-height: 72vh; }
+.ai-chat-sidebar { border-right: 1px solid rgba(127,127,127,0.2); }
+
+/* Session list */
+.ai-session-item { display: flex; align-items: center; gap: 0.55rem; padding: 0.65rem 0.75rem; border-radius: 8px; cursor: pointer; transition: background 0.15s; }
+.ai-session-item:hover { background: rgba(127,127,127,0.12); }
+.ai-session-item.is-active { background: rgba(72,199,142,0.18); }
+.ai-session-icon { width: 28px; height: 28px; border-radius: 50%; background: rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; font-size: 0.7rem; flex-shrink: 0; }
+.ai-session-body { overflow: hidden; }
+.ai-session-title { font-weight: 600; font-size: 0.83rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ai-session-date { font-size: 0.68rem; opacity: 0.5; }
+
+/* Thread */
+.ai-thread { min-height: 52vh; max-height: 60vh; overflow-y: auto; padding: 1.25rem 0.75rem; display: flex; flex-direction: column; gap: 0.85rem; scroll-behavior: smooth; }
+
+/* Message row */
+.ai-msg-row { display: flex; align-items: flex-start; gap: 0.6rem; }
+.ai-msg-row.is-user { flex-direction: row-reverse; }
+
+/* Avatar */
+.ai-avatar { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; flex-shrink: 0; margin-top: 2px; }
+.ai-avatar-user { background: #48c78e; color: #082016; }
+.ai-avatar-bot { background: rgba(255,255,255,0.1); color: #aaa; }
+
+/* Bubble */
+.ai-bubble-wrap { max-width: 78%; }
+.ai-bubble { padding: 0.7rem 0.95rem; border-radius: 14px; font-size: 0.88rem; line-height: 1.6; word-break: break-word; }
+.is-user .ai-bubble { background: #48c78e; color: #082016; border-bottom-right-radius: 3px; }
+.is-assistant .ai-bubble { background: rgba(255,255,255,0.08); color: #e4e4e4; border-bottom-left-radius: 3px; }
+.ai-msg-time { font-size: 0.67rem; opacity: 0.45; margin-top: 0.2rem; padding: 0 0.2rem; }
+.is-user .ai-msg-time { text-align: right; }
+
+/* Markdown inside assistant bubble */
+.ai-bubble h1,.ai-bubble h2,.ai-bubble h3 { font-weight: 700; margin: 0.5rem 0 0.2rem; }
+.ai-bubble h1 { font-size: 1.05rem; }
+.ai-bubble h2 { font-size: 0.97rem; }
+.ai-bubble h3 { font-size: 0.9rem; }
+.ai-bubble p { margin: 0 0 0.45rem; }
+.ai-bubble p:last-child { margin-bottom: 0; }
+.ai-bubble ul,.ai-bubble ol { padding-left: 1.2rem; margin: 0.2rem 0 0.4rem; }
+.ai-bubble li { margin-bottom: 0.1rem; }
+.ai-bubble code { background: rgba(0,0,0,0.28); padding: 0.1em 0.35em; border-radius: 4px; font-size: 0.8rem; font-family: monospace; }
+.ai-bubble pre { background: rgba(0,0,0,0.35); padding: 0.7rem; border-radius: 8px; overflow-x: auto; margin: 0.4rem 0; }
+.ai-bubble pre code { background: none; padding: 0; }
+.ai-bubble table { border-collapse: collapse; width: 100%; margin: 0.4rem 0; font-size: 0.8rem; }
+.ai-bubble th,.ai-bubble td { border: 1px solid rgba(255,255,255,0.14); padding: 0.28rem 0.55rem; }
+.ai-bubble th { background: rgba(255,255,255,0.08); font-weight: 600; }
+.ai-bubble blockquote { border-left: 3px solid #48c78e; margin: 0.35rem 0; padding: 0.2rem 0.7rem; opacity: 0.8; }
+.ai-bubble hr { border: none; border-top: 1px solid rgba(255,255,255,0.12); margin: 0.5rem 0; }
+.ai-bubble a { color: #48c78e; text-decoration: underline; }
+.is-user .ai-bubble code { background: rgba(0,0,0,0.15); }
+.is-user .ai-bubble a { color: #082016; }
+
+/* Pending action card */
+.ai-action-card { margin: 0.25rem 0 0 calc(30px + 0.6rem); border: 1px solid #ffdd57; border-radius: 10px; padding: 0.85rem 1rem; background: rgba(255,221,87,0.09); max-width: calc(78% + 30px + 0.6rem); }
+.ai-action-summary { font-weight: 600; font-size: 0.87rem; margin-bottom: 0.5rem; }
+.ai-action-fields { display: flex; flex-direction: column; gap: 0.2rem; margin-bottom: 0.65rem; }
+.ai-action-field { display: flex; gap: 0.5rem; font-size: 0.82rem; }
+.ai-action-field-label { opacity: 0.65; min-width: 7rem; }
+
+/* Empty state */
+.ai-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 52vh; opacity: 0.4; gap: 0.5rem; text-align: center; }
+.ai-empty i { font-size: 2.8rem; }
+.ai-empty p { font-size: 0.9rem; }
+
+/* Input area */
+.ai-input-area { border-top: 1px solid rgba(127,127,127,0.15); padding-top: 0.85rem; margin-top: 0.25rem; }
+
+@media (max-width: 768px) {
+    .ai-chat-sidebar { border-right: 0; border-bottom: 1px solid rgba(127,127,127,0.2); margin-bottom: 0.75rem; }
+    .ai-bubble-wrap { max-width: 90%; }
+    .ai-thread { max-height: 50vh; }
+    .ai-action-card { max-width: 100%; margin-left: 0; }
+}
 </style>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@9/marked.min.js"></script>
 
 <div class="columns">
     <div class="column is-1"></div>
@@ -29,34 +87,42 @@
         @include('flashmsg.php')
 
         <div class="columns ai-chat-shell" id="ai-chat-app">
-            <div class="column is-3 ai-chat-sessions">
+            <div class="column is-3 ai-chat-sidebar">
                 <div class="margin-bottom">
                     <button class="button is-success is-fullwidth" id="ai-chat-new-session">
-                        <i class="fas fa-plus"></i>&nbsp;{{ __('app.ai_chat_new_session') }}
+                        <span class="icon"><i class="fas fa-plus"></i></span>
+                        <span>{{ __('app.ai_chat_new_session') }}</span>
                     </button>
                 </div>
-
-                <div id="ai-chat-session-list"></div>
+                <div id="ai-session-list"></div>
             </div>
 
-            <div class="column is-9">
-                <div class="ai-chat-thread" id="ai-chat-thread">
-                    <div class="ai-chat-empty">{{ __('app.ai_chat_empty_state') }}</div>
+            <div class="column is-9" style="display:flex;flex-direction:column;">
+                <div class="ai-thread" id="ai-thread">
+                    <div class="ai-empty" id="ai-empty-state">
+                        <i class="fas fa-seedling"></i>
+                        <p>{{ __('app.ai_chat_empty_state') }}</p>
+                    </div>
                 </div>
 
-                <form id="ai-chat-form" class="margin-vertical">
-                    <div class="field">
-                        <div class="control">
-                            <textarea class="textarea is-input-dark" id="ai-chat-input" rows="3" placeholder="{{ __('app.ai_chat_placeholder') }}"></textarea>
+                <div class="ai-input-area">
+                    <form id="ai-chat-form">
+                        <div class="field has-addons" style="margin-bottom:0;">
+                            <div class="control is-expanded">
+                                <textarea class="textarea is-input-dark" id="ai-input" rows="2"
+                                    placeholder="{{ __('app.ai_chat_placeholder') }}"
+                                    style="resize:none;border-radius:10px 0 0 10px;"></textarea>
+                            </div>
+                            <div class="control">
+                                <button class="button is-success" id="ai-send" type="submit"
+                                    style="height:100%;border-radius:0 10px 10px 0;padding:0 1.25rem;">
+                                    <span class="icon"><i class="fas fa-paper-plane"></i></span>
+                                </button>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="field is-grouped is-justify-content-flex-end">
-                        <div class="control">
-                            <button class="button is-success" id="ai-chat-send" type="submit">{{ __('app.send') }}</button>
-                        </div>
-                    </div>
-                </form>
+                        <p class="help" style="opacity:0.4;margin-top:0.3rem;">{{ __('app.ai_chat_send_hint') }}</p>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -66,69 +132,73 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const labels = {
-        emptyState: '{{ __('app.ai_chat_empty_state') }}',
+    const L = {
         pendingApproval: '{{ __('app.ai_chat_pending_approval') }}',
-        approve: '{{ __('app.ai_chat_approve') }}',
-        reject: '{{ __('app.ai_chat_reject') }}',
-        approved: '{{ __('app.ai_chat_approved') }}',
-        rejected: '{{ __('app.ai_chat_rejected') }}',
-        failed: '{{ __('app.ai_chat_failed') }}',
-        loading: '{{ __('app.loading_please_wait') }}'
+        approve:         '{{ __('app.ai_chat_approve') }}',
+        reject:          '{{ __('app.ai_chat_reject') }}',
+        approved:        '{{ __('app.ai_chat_approved') }}',
+        rejected:        '{{ __('app.ai_chat_rejected') }}',
+        failed:          '{{ __('app.ai_chat_failed') }}',
+        loading:         '{{ __('app.loading_please_wait') }}',
+        send:            '{{ __('app.send') }}'
     };
 
-    let sessions = [];
-    let currentSessionId = null;
-    let messages = [];
-    let actions = [];
+    const md = (typeof marked !== 'undefined') ? function(text) {
+        return marked.parse(text, { breaks: true, gfm: true });
+    } : function(text) {
+        return escHtml(text).replace(/\n/g, '<br>');
+    };
 
-    const sessionList = document.getElementById('ai-chat-session-list');
-    const thread = document.getElementById('ai-chat-thread');
-    const input = document.getElementById('ai-chat-input');
-    const sendButton = document.getElementById('ai-chat-send');
+    let sessions = [], currentSessionId = null, messages = [], actions = [];
+
+    const sessionList = document.getElementById('ai-session-list');
+    const thread      = document.getElementById('ai-thread');
+    const emptyState  = document.getElementById('ai-empty-state');
+    const input       = document.getElementById('ai-input');
+    const sendBtn     = document.getElementById('ai-send');
 
     document.getElementById('ai-chat-new-session').addEventListener('click', function() {
         currentSessionId = null;
-        messages = [];
-        actions = [];
-        input.value = '';
+        messages = []; actions = [];
         renderSessions();
         renderThread();
         input.focus();
     });
 
-    document.getElementById('ai-chat-form').addEventListener('submit', function(event) {
-        event.preventDefault();
+    document.getElementById('ai-chat-form').addEventListener('submit', function(e) {
+        e.preventDefault();
         sendMessage();
     });
 
-    input.addEventListener('keydown', function(event) {
-        if ((event.metaKey || event.ctrlKey) && event.key === 'Enter') {
-            event.preventDefault();
+    input.addEventListener('keydown', function(e) {
+        if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
+            e.preventDefault();
             sendMessage();
         }
     });
 
     loadSessions();
 
+    /* ---- data ---- */
+
     function loadSessions() {
-        window.axios.get(window.location.origin + '/ai-chat/sessions').then(function(response) {
-            if (response.data.code !== 200) throw new Error(response.data.msg);
-            sessions = response.data.sessions;
+        window.axios.get(origin() + '/ai-chat/sessions').then(function(r) {
+            if (r.data.code !== 200) throw new Error(r.data.msg);
+            sessions = r.data.sessions;
             if (!currentSessionId && sessions.length > 0) {
                 currentSessionId = sessions[0].id;
                 loadMessages(currentSessionId);
             }
             renderSessions();
-            renderThread();
+            if (!currentSessionId) renderThread();
         }).catch(showError);
     }
 
     function loadMessages(sessionId) {
-        window.axios.get(window.location.origin + '/ai-chat/messages?session_id=' + encodeURIComponent(sessionId)).then(function(response) {
-            if (response.data.code !== 200) throw new Error(response.data.msg);
-            messages = response.data.messages;
-            actions = response.data.actions;
+        window.axios.get(origin() + '/ai-chat/messages?session_id=' + encodeURIComponent(sessionId)).then(function(r) {
+            if (r.data.code !== 200) throw new Error(r.data.msg);
+            messages = r.data.messages;
+            actions  = r.data.actions;
             renderThread();
         }).catch(showError);
     }
@@ -137,127 +207,164 @@ document.addEventListener('DOMContentLoaded', function() {
         const text = input.value.trim();
         if (!text) return;
 
-        sendButton.disabled = true;
-        sendButton.innerText = labels.loading;
-        messages.push({ role: 'user', content: escapeHtml(text), diffForHumans: '' });
+        setBusy(true);
+
+        const optimistic = { id: null, role: 'user', content: text, diffForHumans: '' };
+        messages.push(optimistic);
         renderThread();
         input.value = '';
 
-        const body = new URLSearchParams();
-        body.set('message', text);
+        const body = new URLSearchParams({ message: text });
         if (currentSessionId) body.set('session_id', currentSessionId);
 
-        window.axios.post(window.location.origin + '/ai-chat/send', body).then(function(response) {
-            if (response.data.code !== 200) throw new Error(response.data.msg);
-            currentSessionId = response.data.session_id;
-            sessions = response.data.sessions;
+        window.axios.post(origin() + '/ai-chat/send', body).then(function(r) {
+            if (r.data.code !== 200) throw new Error(r.data.msg);
+            currentSessionId = r.data.session_id;
+            sessions = r.data.sessions;
             loadMessages(currentSessionId);
             renderSessions();
-        }).catch(showError).finally(function() {
-            sendButton.disabled = false;
-            sendButton.innerText = '{{ __('app.send') }}';
-            input.focus();
-        });
+        }).catch(showError).finally(function() { setBusy(false); input.focus(); });
     }
 
     function updateAction(actionId, path) {
-        const body = new URLSearchParams();
-        body.set('action_id', actionId);
-        window.axios.post(window.location.origin + path, body).then(function(response) {
-            if (response.data.code !== 200) throw new Error(response.data.msg);
-            messages = response.data.messages;
-            actions = response.data.actions;
+        window.axios.post(origin() + path, new URLSearchParams({ action_id: actionId })).then(function(r) {
+            if (r.data.code !== 200) throw new Error(r.data.msg);
+            messages = r.data.messages;
+            actions  = r.data.actions;
             renderThread();
         }).catch(showError);
     }
 
+    /* ---- render ---- */
+
     function renderSessions() {
         sessionList.innerHTML = '';
-        sessions.forEach(function(session) {
-            const link = document.createElement('a');
-            link.href = 'javascript:void(0);';
-            link.className = 'ai-chat-session' + ((session.id == currentSessionId) ? ' is-active' : '');
-            link.innerHTML = '<strong>' + escapeHtml(session.title) + '</strong><br/><small>' + escapeHtml(session.updated_at || '') + '</small>';
-            link.addEventListener('click', function() {
-                currentSessionId = session.id;
+        sessions.forEach(function(s) {
+            const el = document.createElement('div');
+            el.className = 'ai-session-item' + (s.id == currentSessionId ? ' is-active' : '');
+            el.innerHTML =
+                '<div class="ai-session-icon"><i class="fas fa-leaf"></i></div>' +
+                '<div class="ai-session-body">' +
+                    '<div class="ai-session-title">' + escHtml(s.title) + '</div>' +
+                    '<div class="ai-session-date">' + escHtml(s.updated_at || '') + '</div>' +
+                '</div>';
+            el.addEventListener('click', function() {
+                currentSessionId = s.id;
                 renderSessions();
-                loadMessages(session.id);
+                loadMessages(s.id);
             });
-            sessionList.appendChild(link);
+            sessionList.appendChild(el);
         });
     }
 
     function renderThread() {
         thread.innerHTML = '';
+
         if (messages.length === 0) {
-            const empty = document.createElement('div');
-            empty.className = 'ai-chat-empty';
-            empty.innerText = labels.emptyState;
-            thread.appendChild(empty);
+            thread.appendChild(emptyState);
             return;
         }
 
-        messages.forEach(function(message) {
-            const bubble = document.createElement('div');
-            bubble.className = 'ai-chat-bubble ' + ((message.role === 'user') ? 'ai-chat-bubble-user' : 'ai-chat-bubble-assistant');
-            bubble.innerHTML = message.content;
-            thread.appendChild(bubble);
+        messages.forEach(function(msg) {
+            const isUser = msg.role === 'user';
+            const row = document.createElement('div');
+            row.className = 'ai-msg-row ' + (isUser ? 'is-user' : 'is-assistant');
 
-            actions.filter(function(action) { return action.message_id == message.id; }).forEach(function(action) {
-                thread.appendChild(renderAction(action));
-            });
+            const avatar = document.createElement('div');
+            avatar.className = 'ai-avatar ' + (isUser ? 'ai-avatar-user' : 'ai-avatar-bot');
+            avatar.innerHTML = '<i class="fas ' + (isUser ? 'fa-user' : 'fa-seedling') + '"></i>';
+
+            const wrap = document.createElement('div');
+            wrap.className = 'ai-bubble-wrap';
+
+            const bubble = document.createElement('div');
+            bubble.className = 'ai-bubble';
+            if (isUser) {
+                bubble.textContent = msg.content;
+            } else {
+                bubble.innerHTML = md(msg.content || '');
+            }
+
+            const time = document.createElement('div');
+            time.className = 'ai-msg-time';
+            time.textContent = msg.diffForHumans || '';
+
+            wrap.appendChild(bubble);
+            wrap.appendChild(time);
+            row.appendChild(avatar);
+            row.appendChild(wrap);
+            thread.appendChild(row);
+
+            if (msg.id) {
+                actions.filter(function(a) { return a.message_id == msg.id; }).forEach(function(a) {
+                    thread.appendChild(renderAction(a));
+                });
+            }
         });
+
         thread.scrollTop = thread.scrollHeight;
     }
 
     function renderAction(action) {
         const card = document.createElement('div');
-        card.className = 'ai-chat-action';
-        const preview = action.preview || {};
-        let html = '<strong>' + labels.pendingApproval + '</strong><br/>';
-        html += '<div>' + escapeHtml(preview.summary || action.tool_name) + '</div>';
-        html += '<div class="ai-chat-action-fields">';
-        (preview.fields || []).forEach(function(field) {
-            html += '<div class="ai-chat-action-field"><strong>' + escapeHtml(field.label) + '</strong><span>' + escapeHtml(field.value) + '</span></div>';
-        });
-        html += '</div><div class="buttons margin-top">';
-        if (action.status === 'pending') {
-            html += '<button class="button is-success is-small" data-ai-approve="' + action.id + '">' + labels.approve + '</button>';
-            html += '<button class="button is-danger is-small" data-ai-reject="' + action.id + '">' + labels.reject + '</button>';
-        } else {
-            html += '<span class="tag ' + statusClass(action.status) + '">' + statusLabel(action.status) + '</span>';
-        }
-        html += '</div>';
-        card.innerHTML = html;
+        card.className = 'ai-action-card';
 
-        const approve = card.querySelector('[data-ai-approve]');
-        if (approve) approve.addEventListener('click', function() { updateAction(action.id, '/ai-chat/action/approve'); });
-        const reject = card.querySelector('[data-ai-reject]');
-        if (reject) reject.addEventListener('click', function() { updateAction(action.id, '/ai-chat/action/reject'); });
+        const preview = action.preview || {};
+        const fields  = Array.isArray(preview.fields) ? preview.fields : [];
+
+        let inner = '<div class="ai-action-summary"><span class="icon-text"><span class="icon"><i class="fas fa-bolt"></i></span><span>' + escHtml(preview.summary || action.tool_name) + '</span></span></div>';
+
+        if (fields.length > 0) {
+            inner += '<div class="ai-action-fields">';
+            fields.forEach(function(f) {
+                inner += '<div class="ai-action-field"><span class="ai-action-field-label">' + escHtml(f.label) + '</span><span>' + escHtml(f.value) + '</span></div>';
+            });
+            inner += '</div>';
+        }
+
+        inner += '<div class="buttons are-small">';
+        if (action.status === 'pending') {
+            inner += '<button class="button is-success" data-approve="' + action.id + '"><span class="icon"><i class="fas fa-check"></i></span><span>' + L.approve + '</span></button>';
+            inner += '<button class="button is-danger is-outlined" data-reject="' + action.id + '"><span class="icon"><i class="fas fa-times"></i></span><span>' + L.reject + '</span></button>';
+        } else {
+            inner += '<span class="tag ' + statusCls(action.status) + '">' + statusLabel(action.status) + '</span>';
+        }
+        inner += '</div>';
+
+        card.innerHTML = inner;
+
+        const approveBtn = card.querySelector('[data-approve]');
+        if (approveBtn) approveBtn.addEventListener('click', function() { updateAction(action.id, '/ai-chat/action/approve'); });
+        const rejectBtn = card.querySelector('[data-reject]');
+        if (rejectBtn) rejectBtn.addEventListener('click', function() { updateAction(action.id, '/ai-chat/action/reject'); });
+
         return card;
     }
 
-    function statusClass(status) {
-        if (status === 'approved') return 'is-success';
-        if (status === 'rejected') return 'is-danger';
-        if (status === 'failed') return 'is-warning';
-        return 'is-light';
+    /* ---- helpers ---- */
+
+    function setBusy(busy) {
+        sendBtn.disabled = busy;
+        sendBtn.innerHTML = busy
+            ? '<span class="icon"><i class="fas fa-spinner fa-spin"></i></span>'
+            : '<span class="icon"><i class="fas fa-paper-plane"></i></span>';
     }
 
-    function statusLabel(status) {
-        if (status === 'approved') return labels.approved;
-        if (status === 'rejected') return labels.rejected;
-        if (status === 'failed') return labels.failed;
-        return status;
+    function statusCls(s) {
+        return s === 'approved' ? 'is-success' : s === 'rejected' ? 'is-danger' : 'is-warning';
     }
 
-    function showError(error) {
-        alert(error.message || String(error));
+    function statusLabel(s) {
+        return s === 'approved' ? L.approved : s === 'rejected' ? L.rejected : s === 'failed' ? L.failed : s;
     }
 
-    function escapeHtml(value) {
-        return String(value || '').replace(/[&<>'"]/g, function(chr) {
-            return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#039;', '"': '&quot;' })[chr];
+    function showError(err) { alert(err.message || String(err)); }
+
+    function origin() { return window.location.origin; }
+
+    function escHtml(v) {
+        return String(v == null ? '' : v).replace(/[&<>'"]/g, function(c) {
+            return {'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#039;','"':'&quot;'}[c];
         });
     }
 });
