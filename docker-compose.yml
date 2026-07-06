@@ -12,14 +12,14 @@ services:
       - app_themes:/var/www/html/public/themes
       - app_migrate:/var/www/html/app/migrations
     environment:
-      APP_ADMIN_EMAIL: "admin@example.com"
-      APP_ADMIN_PASSWORD: "password"
-      APP_TIMEZONE: "UTC"
+      APP_ADMIN_EMAIL: "${APP_ADMIN_EMAIL}"
+      APP_ADMIN_PASSWORD: "${APP_ADMIN_PASSWORD}"
+      APP_TIMEZONE: "${APP_TIMEZONE}"
       DB_HOST: db
       DB_PORT: 3306
       DB_DATABASE: hortusfox
       DB_USERNAME: user
-      DB_PASSWORD: password
+      DB_PASSWORD: "${DB_PASSWORD}"
       DB_CHARSET: "utf8mb4"
     depends_on:
       - db
@@ -28,10 +28,10 @@ services:
     image: mariadb
     restart: always
     environment:
-      MARIADB_ROOT_PASSWORD: my-secret-pw
+      MARIADB_ROOT_PASSWORD: "${MARIADB_ROOT_PASSWORD}"
       MARIADB_DATABASE: hortusfox
       MARIADB_USER: user
-      MARIADB_PASSWORD: password
+      MARIADB_PASSWORD: "${MARIADB_PASSWORD}"
     ports:
       - "3306:3306"
     volumes:
