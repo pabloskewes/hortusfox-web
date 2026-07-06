@@ -7,6 +7,7 @@ import { registerLocationTools } from "./tools/locations.js";
 import { registerPlantTools } from "./tools/plants.js";
 import { registerTaskTools } from "./tools/tasks.js";
 import { registerMoistureTools } from "./tools/moisture.js";
+import { registerSpeciesTools } from "./tools/species.js";
 
 const server = new McpServer({
     name: "hortusfox",
@@ -17,6 +18,7 @@ registerLocationTools(server);
 registerPlantTools(server);
 registerTaskTools(server);
 registerMoistureTools(server);
+registerSpeciesTools(server);
 
 const transport = new StdioServerTransport();
 await server.connect(transport);
