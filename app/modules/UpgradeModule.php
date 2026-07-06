@@ -9,6 +9,21 @@ class UpgradeModule {
     /**
      * @return void
      */
+    private static function upgradeTo5dot10()
+    {
+        SpeciesInfoCacheModel::raw('CREATE TABLE IF NOT EXISTS `@THIS` (
+            id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+            source VARCHAR(64) NOT NULL,
+            scientific_name VARCHAR(255) NOT NULL,
+            data_json LONGTEXT NOT NULL,
+            fetched_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            expires_at DATETIME NOT NULL
+        )');
+    }
+
+    /**
+     * @return void
+     */
     private static function upgradeTo5dot9()
     {
         MoistureReadingModel::raw('CREATE TABLE IF NOT EXISTS `@THIS` (
