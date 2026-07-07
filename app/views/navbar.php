@@ -24,8 +24,8 @@
         <div class="navbar-start"></div>
 
         <div class="navbar-end">
-            <div class="navbar-item nav-mobile-only">
-                <a href="{{ url('/') }}">
+            <div class="navbar-item">
+                <a href="{{ url('/plants') }}">
                     <i class="fas fa-leaf" title="{{ __('app.nav_plants') }}"></i><span class="navbar-item-only-mobile">&nbsp;{{ __('app.nav_plants') }}</span>
                 </a>
             </div>
@@ -39,7 +39,7 @@
             @if (AiChatConfigModule::isEnabled())
             <div class="navbar-item">
                 <a href="{{ url('/ai-chat') }}">
-                    <i class="fas fa-seedling" title="{{ __('app.ai_chat') }}"></i><span class="navbar-item-only-mobile">&nbsp;{{ __('app.ai_chat') }}</span>
+                    <i class="fas fa-wand-magic-sparkles" title="{{ __('app.ai_chat') }}"></i><span class="navbar-item-only-mobile">&nbsp;{{ __('app.ai_chat') }}</span>
                 </a>
             </div>
             @endif

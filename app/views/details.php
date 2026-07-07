@@ -8,6 +8,15 @@
 	<a class="is-default-link" href="{{ url('/plants/location/' . $plant->get('location')) }}">{{ __('app.back_to_list') }}</a>
 </div>
 
+@if (AiChatConfigModule::isEnabled())
+<div class="margin-vertical">
+	<a class="button ai-enrich-button" href="{{ url('/ai-chat?enrich_plant=' . $plant->get('id')) }}">
+		<span class="icon"><i class="fas fa-wand-magic-sparkles"></i></span>
+		<span>{{ __('app.ai_enrich_plant') }}</span>
+	</a>
+</div>
+@endif
+
 @include('flashmsg.php')
 
 <div class="margin-vertical is-default-text-color">

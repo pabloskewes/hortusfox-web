@@ -1,8 +1,6 @@
 <div class="dashboard-header">
 	<div class="dashboard-welcome">
-		<h1>{{ __('app.dashboard') }}</h1>
-
-		<h2>{{ __('app.welcome_message', ['name' => $user->get('name')]) }}</h2>
+		<h1>{{ __('app.welcome_message', ['name' => $user->get('name')]) }}</h1>
 	</div>
 
 	@if (($weather) && (is_object($weather)))
@@ -23,28 +21,26 @@
 
 @include('flashmsg.php')
 
-<div class="stats">
-	<div class="stats-item is-pointer" onclick="location.href = '{{ url('/#last-added-or-authored-plants') }}';">
-		<div class="stats-item-count">{{ $stats['plants'] }}</div>
-		<div class="stats-item-label">{{ __('app.plants') }}</div>
-	</div>
+<div class="quick-links">
+	<a class="quick-link-card" href="{{ url('/plants') }}">
+		<div class="quick-link-icon"><i class="fas fa-leaf"></i></div>
+		<div class="quick-link-body">
+			<div class="quick-link-title">{{ __('app.nav_plants') }}</div>
+			<div class="quick-link-hint">{{ __('app.dashboard_plants_hint', ['count' => $stats['plants']]) }}</div>
+		</div>
+		<div class="quick-link-arrow"><i class="fas fa-chevron-right"></i></div>
+	</a>
 
-	<div class="stats-item is-pointer" onclick="location.href = '{{ url('/#locations') }}';">
-		<div class="stats-item-count">{{ $stats['locations'] }}</div>
-		<div class="stats-item-label">{{ __('app.locations') }}</div>
-	</div>
-
-	@if (app('tasks_enable'))
-	<div class="stats-item is-pointer" onclick="location.href = '{{ url('/tasks') }}';">
-		<div class="stats-item-count">{{ $stats['tasks'] }}</div>
-		<div class="stats-item-label">{{ __('app.tasks') }}</div>
-	</div>
+	@if (AiChatConfigModule::isEnabled())
+	<a class="quick-link-card" href="{{ url('/ai-chat') }}">
+		<div class="quick-link-icon quick-link-icon-ai"><i class="fas fa-wand-magic-sparkles"></i></div>
+		<div class="quick-link-body">
+			<div class="quick-link-title">{{ __('app.ai_chat') }}</div>
+			<div class="quick-link-hint">{{ __('app.dashboard_ai_hint') }}</div>
+		</div>
+		<div class="quick-link-arrow"><i class="fas fa-chevron-right"></i></div>
+	</a>
 	@endif
-
-	<div class="stats-item is-pointer" onclick="location.href = '{{ (($user->get('admin')) ? url('/admin?tab=users') : url('/profile')) }}';">
-		<div class="stats-item-count">{{ $stats['users'] }}</div>
-		<div class="stats-item-label">{{ __('app.users') }}</div>
-	</div>
 </div>
 
 <div class="line-up-frames">
@@ -214,54 +210,6 @@
 	</div>
 </div>
 @endif
-
-<div class="last-added-or-authored-plants">
-	<a name="last-added-or-authored-plants"></a>
-
-	<h3>
-		@if ($user->get('show_plants_aoru'))
-			{{ __('app.last_added_plants') }}
-		@else
-			{{ __('app.last_authored_plants') }}
-		@endif
-	</h3>
-
-	@if (count($last_plants_list) > 0)
-	<div class="plants">
-		@foreach ($last_plants_list as $plant)
-			<a href="{{ url('/plants/details/' . $plant->get('id')) }}">
-				<div class="plant-card">
-					<div class="plant-card-image" style="background-image: url('{{ abs_photo($plant->get('photo')) }}');">
-						<div class="plant-card-overlay"></div>
-					</div>
-
-					<div class="plant-card-health-state">
-						@if ($plant->get('health_state') !== 'in_good_standing')
-							<i class="{{ PlantsModel::$plant_health_states[$plant->get('health_state')]['icon'] }} plant-state-{{ $plant->get('health_state') }}"></i>
-						@endif
-					</div>
-
-					<div class="plant-card-title {{ ((strlen($plant->get('name')) > PlantsModel::PLANT_LONG_TEXT_THRESHOLD) ? 'plant-card-title-longtext' : '') }}">
-						@if ($user->get('show_plant_id'))
-							<span class="plant-card-title-plant-id">{{ $plant->get('id') }}</span>
-						@endif
-
-						<span>{{ $plant->get('name') . (((PlantsModel::offspringCount($plant->get('id'))) || (PlantsModel::getDetails($plant->get('clone_origin')) !== null)) ? ' (' . strval($plant->get('clone_num') + 1) . ')' : '') }}</span>
-					</div>
-				</div>
-			</a>
-		@endforeach
-		</div>
-	@else
-	<div class="plants-empty">
-		<div class="plants-empty-image">
-			<img src="{{ asset('img/plantsempty.png') }}" alt="image"/>
-		</div>
-
-		<div class="plants-empty-text">{{ __('app.content_empty') }}</div>
-	</div>
-	@endif
-</div>
 
 @if ($user->get('show_log'))
 	@if (count($log) > 0)

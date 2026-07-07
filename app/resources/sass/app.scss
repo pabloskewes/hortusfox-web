@@ -1,6 +1,33 @@
 /*
     app.scss
+
+    Light botanical theme. All colors flow from the CSS variables below;
+    component rules reference var(--hf-*) instead of hardcoded values.
 */
+
+:root {
+    --hf-bg: #F6F5F0;              /* warm off-white app background */
+    --hf-surface: #FFFFFF;          /* cards, modals, inputs */
+    --hf-surface-sunken: #EEEDE5;   /* stripes, footers, subtle wells */
+    --hf-border: #E3E1D7;
+    --hf-border-strong: #C9C7BB;
+    --hf-text: #2A342E;             /* primary text (dark green-gray) */
+    --hf-text-muted: #67746B;
+    --hf-text-faint: #97A29A;
+    --hf-heading: #1C2B23;
+    --hf-primary: #2D6A4F;          /* forest green */
+    --hf-primary-strong: #1B4332;
+    --hf-primary-soft: #DCEFE2;     /* soft green tint */
+    --hf-link: #2D6A4F;
+    --hf-success: #2F9E44;
+    --hf-warning: #B7791F;
+    --hf-warning-soft: #FBF3DB;
+    --hf-danger: #C0392B;
+    --hf-thead: #DCEFE2;            /* table header tint */
+    --hf-navbar-bg: #1B4332;        /* deep green top nav */
+    --hf-navbar-text: #CFE8D8;
+    --hf-shadow: 0 1px 3px rgba(27, 43, 34, 0.08), 0 4px 14px rgba(27, 43, 34, 0.07);
+}
 
 html {
     overflow-y: hidden;
@@ -11,7 +38,7 @@ html, body {
     height: 100%;
     padding: 0;
     margin: 0;
-    background-color: rgb(48, 52, 55);
+    background-color: var(--hf-bg);
 }
 
 body {
@@ -33,13 +60,13 @@ body {
 
 h1 {
     font-size: 2.5em;
-    color: rgb(250, 250, 250);
+    color: var(--hf-heading);
 }
 
 h2 {
     font-size: 2.0em;
     margin-bottom: 30px;
-    color: rgb(200, 200, 200);
+    color: var(--hf-text);
 }
 
 .smaller-headline {
@@ -48,34 +75,34 @@ h2 {
 }
 
 .is-default-link {
-    color: rgb(79, 134, 202);
+    color: var(--hf-link);
 }
 
 .is-default-link:hover {
-    color: rgb(79, 134, 202);
+    color: var(--hf-link);
     text-decoration: underline;
 }
 
 .is-yellow-link {
-    color: rgb(156, 115, 67);
+    color: var(--hf-warning);
 }
 
 .is-yellow-link:hover {
-    color: rgb(156, 115, 67);
+    color: var(--hf-warning);
     text-decoration: underline;
 }
 
 .is-gray-link {
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
 }
 
 .is-gray-link:hover {
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
     text-decoration: underline;
 }
 
 .is-dark-delimiter hr {
-    background-color: rgb(100, 100, 100);
+    background-color: var(--hf-surface-sunken);
 }
 
 .is-fixed-button-link {
@@ -90,21 +117,21 @@ h2 {
 }
 
 .is-default-text-color {
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
 }
 
 .is-color-darker {
-    color: rgb(100, 100, 100);
+    color: var(--hf-text-faint);
 }
 
 .is-color-error {
-    color: rgb(154, 73, 69);
+    color: var(--hf-danger);
 }
 
 .is-input-dark {
-    background-color: rgba(90, 90, 90, 0.5);
-    color: rgb(200, 200, 200);
-    border: 1px solid rgb(100, 100, 100);
+    background-color: var(--hf-surface-sunken);
+    color: var(--hf-text);
+    border: 1px solid var(--hf-border);
 }
 
 .is-action-button-margin {
@@ -210,15 +237,15 @@ h2 {
 }
 
 .field small {
-    color: rgb(120, 120, 120);
+    color: var(--hf-text-muted);
 }
 
 .form-paragraph-modal a, .modal-anchors a {
-    color: rgb(52, 105, 215);
+    color: var(--hf-link);
 }
 
 .form-paragraph-modal a:hover, .modal-anchors a:hover {
-    color: rgb(52, 105, 215);
+    color: var(--hf-link);
     text-decoration: underline;
 }
 
@@ -236,33 +263,33 @@ h2 {
 }
 
 .navbar-item a {
-    color: rgb(200, 200, 200);
+    color: var(--hf-text);
 }
 
 .navbar-item a:hover {
-    color: rgb(250, 250, 250);
+    color: var(--hf-heading);
 }
 
 a.navbar-item:hover, a.navbar-item.is-active, .navbar-link:hover, .navbar-link.is-active {
     background-color: rgba(255, 255, 255, 0.0) !important;
-    color: rgb(180, 180, 180) !important;
+    color: var(--hf-text) !important;
 }
 
 .navbar-item, .navbar-burger, .navbar-link {
-    color: rgb(190, 190, 190);
+    color: var(--hf-text);
 }
 
 .navbar-dropdown {
-    background-color: rgb(50, 50, 48);
+    background-color: var(--hf-surface);
     padding-top: unset;
 }
 
 .dropdown-content {
-    background-color: rgb(32, 32, 32);
+    background-color: var(--hf-surface);
 }
 
 .dropdown-item {
-    color: rgb(200, 200, 200);
+    color: var(--hf-text);
 }
 
 .dropdown-item svg {
@@ -274,8 +301,8 @@ a.navbar-item:hover, a.navbar-item.is-active, .navbar-link:hover, .navbar-link.i
 }
 
 a.dropdown-item:hover, button.dropdown-item:hover {
-    background-color: rgb(50, 50, 50);
-    color: rgb(230, 230, 230);
+    background-color: var(--hf-surface);
+    color: var(--hf-text);
 }
 
 .navbar-item.has-dropdown:hover .navbar-link, .navbar-item.has-dropdown.is-active .navbar-link {
@@ -284,12 +311,12 @@ a.dropdown-item:hover, button.dropdown-item:hover {
 
 @media screen and (max-width: 1087px) {
     .navbar-menu {
-        background-color: rgb(50, 50, 48);
+        background-color: var(--hf-surface);
     }
 }
 
 a.navbar-burger:hover {
-    color: rgb(200, 200, 200);
+    color: var(--hf-text);
 }
 
 .navbar-start {
@@ -393,43 +420,43 @@ a.navbar-burger:hover {
 }
 
 .modal-card {
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
 }
 
 .modal-card-head {
-    background-color: rgb(55, 59, 62);
-    border-bottom: 1px solid rgb(59, 59, 59);
+    background-color: var(--hf-surface);
+    border-bottom: 1px solid var(--hf-border);
 }
 
 .modal-card-title {
-    color: rgb(190, 190, 190);
+    color: var(--hf-text);
 }
 
 .modal-card-body {
-    background-color: rgb(48, 52, 55);
+    background-color: var(--hf-bg);
 }
 
 .modal-card-body label {
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
 }
 
 .modal-card-body input, .modal-card-body select, .modal-card-body textarea, .modal-card-body table {
-    background-color: rgb(57, 59, 63);
-    color: rgb(150, 150, 150);
-    border: 1px solid rgb(100, 100, 100);
+    background-color: var(--hf-surface);
+    color: var(--hf-text-muted);
+    border: 1px solid var(--hf-border);
 }
 
 .modal-card-body input::placeholder, .modal-card-body select::placeholder, .modal-card-body textarea::placeholder {
-    color: rgb(250, 250, 250);
+    color: var(--hf-heading);
 }
 
 .modal-card-body hr {
-    background-color: rgb(100, 100, 100);
+    background-color: var(--hf-surface-sunken);
 }
 
 .modal-card-foot {
-    background-color: rgb(50, 50, 50);
-    border-top: 1px solid rgb(59, 59, 59);
+    background-color: var(--hf-surface);
+    border-top: 1px solid var(--hf-border);
 }
 
 .fade {
@@ -490,7 +517,7 @@ fieldset .field {
     padding-left: 10px;
     padding-right: 10px;
     border-radius: 50%;
-    background: rgba(255, 0, 0, 0.9);
+    background: var(--hf-danger);
     color: rgb(255, 255, 255);
     font-size: 0.8em;
 }
@@ -513,7 +540,7 @@ fieldset .field {
     position: relative;
     top: 20px;
     float: right;
-    color: rgb(200, 200, 200);
+    color: var(--hf-text);
     @media screen and (max-width: 525px) {
         top: -20px;
         float: unset;
@@ -556,11 +583,11 @@ fieldset .field {
 }
 
 .locations a {
-    color: rgb(100, 100, 100);
+    color: var(--hf-text-faint);
 }
 
 .locations a:hover {
-    color: rgb(100, 100, 100);
+    color: var(--hf-text-faint);
 }
 
 .location {
@@ -571,7 +598,7 @@ fieldset .field {
     margin-left: 10px;
     margin-right: 10px;
     margin-bottom: 59px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: var(--hf-shadow);
     overflow: hidden;
     @media screen and (max-width: 830px) {
         width: 310px;
@@ -602,7 +629,7 @@ fieldset .field {
 }
 
 .location:hover {
-    box-shadow: 0 0 20px 0 rgba(105, 165, 85, 0.95);
+    box-shadow: 0 0 0 2px var(--hf-primary), var(--hf-shadow);
 }
 
 .location:hover::before {
@@ -628,7 +655,7 @@ fieldset .field {
     }
     margin-bottom: 20px;
     background-color: rgba(0, 0, 0, 0.83);
-    color: rgb(200, 200, 200);
+    color: var(--hf-text);
 }
 
 .location-footer {
@@ -640,9 +667,9 @@ fieldset .field {
     padding-bottom: 10px;
     font-size: 0.9em;
     text-align: left;
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
     background-color: rgba(0, 0, 0, 0.8);
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: var(--hf-shadow);
     @media screen and (max-width: 830px) {
         font-size: 0.75em;
     }
@@ -669,12 +696,12 @@ fieldset .field {
 .location-notes-title {
     margin-bottom: 20px;
     font-size: 1.5em;
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
 }
 
 .location-notes textarea {
-    color: rgb(150, 150, 150);
-    background-color: rgb(50, 50, 50);
+    color: var(--hf-text-muted);
+    background-color: var(--hf-surface);
     margin-top: 20px;
     margin-bottom: 20px;
 }
@@ -686,7 +713,7 @@ fieldset .field {
 }
 
 .location-notes svg {
-    color: rgb(115, 215, 105);
+    color: var(--hf-success);
 }
 
 .upcoming-tasks-overview {
@@ -698,7 +725,7 @@ fieldset .field {
 .upcoming-tasks-overview h3 {
     padding-top: 25px;
     font-size: 2.0em;
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
 }
 
 .upcoming-tasks-overview-items {
@@ -711,15 +738,15 @@ fieldset .field {
     margin-left: -20px;
     margin-right: -20px;
     padding-bottom: 5px;
-    background-color: rgb(55, 59, 62);
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background-color: var(--hf-surface);
+    box-shadow: var(--hf-shadow);
     text-align: center;
 }
 
 .last-added-or-authored-plants h3 {
     padding-top: 15px;
     font-size: 2.0em;
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
 }
 
 .margin-vertical {
@@ -761,11 +788,11 @@ fieldset .field {
 }
 
 .sorting-control a {
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
 }
 
 .sorting-control a.is-selected {
-    color: rgb(200, 200, 200);
+    color: var(--hf-text);
 }
 
 .sorting-control svg {
@@ -773,9 +800,9 @@ fieldset .field {
 }
 
 .sorting-control select, .sorting-control input[type=text] {
-    color: rgb(200, 200, 200);
-    background-color: rgba(50, 50, 50, 0.9);
-    border: 1px solid rgb(100, 100, 100);
+    color: var(--hf-text);
+    background-color: var(--hf-surface);
+    border: 1px solid var(--hf-border);
     margin-right: 5px;
 }
 
@@ -800,7 +827,7 @@ fieldset .field {
 }
 
 .select:not(.is-multiple):not(.is-loading)::after {
-    border-color: rgb(50, 115, 220) !important;
+    border-color: var(--hf-primary) !important;
 }
 
 .plants {
@@ -824,7 +851,7 @@ fieldset .field {
 .plants-empty-text {
     position: relative;
     top: -20px;
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
     font-style: italic;
     font-size: 1.4em;
 }
@@ -842,12 +869,12 @@ fieldset .field {
     margin-right: 10px;
     margin-bottom: 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
+    box-shadow: var(--hf-shadow);
     overflow: hidden;
 }
 
 .plant-card:hover {
-    box-shadow: 0 0 20px 0 rgba(105, 165, 85, 0.95);
+    box-shadow: 0 0 0 2px var(--hf-primary), var(--hf-shadow);
 }
 
 .plant-card-dropdown {
@@ -889,7 +916,7 @@ fieldset .field {
     height: 69px;
     padding-top: 17px;
     background-color: rgba(0, 0, 0, 0.5);
-    color: rgb(200, 200, 200);
+    color: var(--hf-text);
     text-align: center;
     font-size: 1.2em;
     border-bottom-left-radius: 10px;
@@ -920,7 +947,7 @@ fieldset .field {
 }
 
 .plant-card-title-second {
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
     font-size: 0.8em;
 }
 
@@ -928,7 +955,7 @@ fieldset .field {
     position: relative;
     top: -1px;
     background-color: rgb(232, 215, 87);
-    color: rgb(10, 10, 10);
+    color: var(--hf-text);
     padding-top: 5px;
     padding-left: 10px;
     padding-right: 10px;
@@ -949,7 +976,7 @@ fieldset .field {
     border: 1px solid rgb(255, 80, 230);
     border-radius: 5px;
     font-size: 0.76em;
-    color: rgb(250, 250, 250);
+    color: var(--hf-heading);
 }
 
 .plant-card-health-state, .plant-card-options {
@@ -960,7 +987,7 @@ fieldset .field {
 }
 
 .plant-card-options {
-    color: rgb(200, 200, 200);
+    color: var(--hf-text);
 }
 
 .plant-card-health-state svg, .plant-card-options svg {
@@ -973,9 +1000,9 @@ fieldset .field {
 .plant-list-item {
     position: relative;
     width: 100%;
-    color: rgb(150, 150, 150);
-    background-color: rgba(50, 50, 50, 0.76);
-    border: 1px solid rgb(90, 90, 90);
+    color: var(--hf-text-muted);
+    background-color: var(--hf-surface);
+    border: 1px solid var(--hf-border);
     padding-top: 5px;
     padding-left: 10px;
     padding-right: 10px;
@@ -993,7 +1020,7 @@ fieldset .field {
     position: relative;
     display: inline-block;
     width: 50px;
-    color: rgb(100, 100, 100);
+    color: var(--hf-text-faint);
 }
 
 .plant-list-name-full {
@@ -1032,7 +1059,7 @@ fieldset .field {
     padding-left: 10px;
     padding-right: 10px;
     padding-bottom: 1px;
-    color: rgb(200, 200, 200);
+    color: var(--hf-text);
     background-color: rgba(240, 65, 205, 0.75);
     border: 1px solid rgb(255, 80, 230);
     border-radius: 5px;
@@ -1067,19 +1094,19 @@ fieldset .field {
     @media screen and (max-width: 786px) {
         width: 100%;
     }
-    color: rgb(200, 200, 200);
+    color: var(--hf-text);
 }
 
 .plant-column table strong {
-    color: rgb(200, 200, 200);
+    color: var(--hf-text);
 }
 
 .plant-column thead {
-    background-color: rgba(104, 145, 194, 0.5);
+    background-color: var(--hf-thead);
 }
 
 .plant-column table td {
-    border: 1px solid rgb(200, 200, 200);
+    border: 1px solid var(--hf-border);
     padding: 10px;
 }
 
@@ -1089,11 +1116,11 @@ fieldset .field {
 }
 
 .plant-custom-attribute a {
-    color: rgb(55, 145, 243);
+    color: var(--hf-link);
 }
 
 .plant-custom-attribute a:hover {
-    color: rgb(55, 145, 243);
+    color: var(--hf-link);
     text-decoration: underline;
 }
 
@@ -1101,11 +1128,11 @@ fieldset .field {
     position: relative;
     top: 10px;
     float: right;
-    color: rgb(200, 105, 105) !important;
+    color: var(--hf-danger) !important;
 }
 
 .plant-custom-attribute-removal:hover {
-    color: rgb(200, 105, 105) !important;
+    color: var(--hf-danger) !important;
     text-decoration: underline;
 }
 
@@ -1122,20 +1149,20 @@ fieldset .field {
     display: inline-block;
     top: 14px;
     font-size: 1.5em;
-    color: rgb(100, 100, 100);
+    color: var(--hf-text-faint);
     float: right;
 }
 
 .is-color-yes, .is-color-ok {
-    color: rgb(115, 214, 103);
+    color: var(--hf-success);
 }
 
 .is-color-no, .is-color-danger {
-    color: rgb(212, 67, 67)
+    color: var(--hf-danger)
 }
 
 .is-not-available {
-    color: rgb(100, 100, 100);
+    color: var(--hf-text-faint);
     font-style: italic;
 }
 
@@ -1150,11 +1177,11 @@ fieldset .field {
     min-height: 75px;
     //margin-bottom: 10px;
     padding: 10px;
-    color: rgb(200, 200, 200);
-    background-color: rgba(90, 90, 90, 0.5);
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    color: var(--hf-text);
+    background-color: var(--hf-surface-sunken);
+    box-shadow: var(--hf-shadow);
     font-size: 1.0em;
-    border: 1px solid rgb(100, 100, 100);
+    border: 1px solid var(--hf-border);
     border-left: 3px solid rgb(163, 122, 61);
     border-radius: 4px;
 }
@@ -1189,7 +1216,7 @@ fieldset .field {
 }
 
 .plant-notes-content a {
-    color: rgb(111, 185, 235);
+    color: var(--hf-link);
 }
 
 .plant-notes-content a:hover {
@@ -1198,7 +1225,7 @@ fieldset .field {
 
 .plant-notes-content strong {
     font-weight: bold;
-    color: rgb(230, 230, 230);
+    color: var(--hf-text);
     font-size: 1.2em;
 }
 
@@ -1243,7 +1270,7 @@ fieldset .field {
     width: 100%;
     height: 45px;
     background-color: rgba(0, 0, 0, 0.8);
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
 }
 
 .plant-photo-view {
@@ -1273,17 +1300,17 @@ fieldset .field {
 #share-photo-result {
     margin-top: 25px;
     padding: 15px;
-    background-color: rgb(115, 215, 105);
-    border: 1px solid rgb(50, 255, 25);
+    background-color: var(--hf-success);
+    border: 1px solid var(--hf-primary);
     border-radius: 4px;
 }
 
 .plant-photo-edit svg, .plant-photo-view svg, .plant-photo-share svg, .plant-photo-clear svg {
-    color: rgb(200, 200, 200);
+    color: var(--hf-text);
 }
 
 .plant-state-in-good-standing {
-    color: rgb(115, 214, 103);
+    color: var(--hf-success);
 }
 
 .plant-state-overwatered {
@@ -1291,7 +1318,7 @@ fieldset .field {
 }
 
 .plant-state-withering {
-    color: rgb(156, 115, 67);
+    color: var(--hf-warning);
 }
 
 .plant-state-infected {
@@ -1333,7 +1360,7 @@ fieldset .field {
     @media screen and (max-width: 510px) {
         margin-bottom: 30px;
     }
-    color: rgb(212, 50, 50);
+    color: var(--hf-danger);
 }
 
 .plant-bulk-update-list {
@@ -1400,13 +1427,13 @@ fieldset .field {
         padding-left: 15px;
         margin-left: unset;
     }
-    background-color: rgb(55, 59, 62);
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background-color: var(--hf-surface);
+    box-shadow: var(--hf-shadow);
     border-radius: 4px;
 }
 
 .has-warnings {
-    color: rgb(200, 105, 105) !important;
+    color: var(--hf-danger) !important;
 }
 
 .is-all-ok {
@@ -1414,14 +1441,14 @@ fieldset .field {
 }
 
 .table-bright-color {
-    background-color: rgb(63, 70, 75);
+    background-color: var(--hf-surface-sunken);
 }
 
 .warning-plants-title {
     margin-top: -2px;
     margin-bottom: 20px;
     font-size: 1.3em;
-    color: rgb(200, 200, 200);
+    color: var(--hf-text);
 }
 
 .warning-plants-title-no-margin-bottom {
@@ -1454,8 +1481,8 @@ fieldset .field {
 }
 
 .warning-plants-content td {
-    color: rgb(150, 150, 150);
-    border: 1px solid rgb(100, 100, 100);
+    color: var(--hf-text-muted);
+    border: 1px solid var(--hf-border);
     padding-top: 5px;
     padding-left: 5px;
     padding-right: 5px;
@@ -1481,24 +1508,24 @@ fieldset .field {
     padding-bottom: 5px;
     padding-left: 20px;
     padding-right: 20px;
-    color: rgb(30, 30, 30);
-    background-color: rgba(200, 200, 200, 0.5);
-    border: 1px solid rgb(150, 150, 150);
+    color: var(--hf-text);
+    background-color: var(--hf-surface-sunken);
+    border: 1px solid var(--hf-border-strong);
     border-radius: 20px;
 }
 
 .history-year a:hover {
-    color: rgb(30, 30, 30);
+    color: var(--hf-text);
     background-color: rgba(200, 200, 200, 0.7);
 }
 
 .history-year-selected a {
-    color: rgb(30, 30, 30);
+    color: var(--hf-text);
     background-color: rgba(220, 220, 220, 0.95);
 }
 
 .history-year-selected a:hover {
-    color: rgb(30, 30, 30);
+    color: var(--hf-text);
     background-color: rgba(250, 250, 250, 0.95);
 }
 
@@ -1525,8 +1552,8 @@ fieldset .field {
         padding-left: 15px;
         padding-right: 2px;
     }
-    background-color: rgb(55, 59, 62);
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background-color: var(--hf-surface);
+    box-shadow: var(--hf-shadow);
     border-radius: 4px;
 }
 
@@ -1534,7 +1561,7 @@ fieldset .field {
     margin-top: 10px;
     margin-bottom: 20px;
     font-size: 1.3em;
-    color: rgb(200, 105, 105);
+    color: var(--hf-danger);
 }
 
 .overdue-tasks-content {
@@ -1550,8 +1577,8 @@ fieldset .field {
 }
 
 .overdue-tasks-content td {
-    color: rgb(150, 150, 150);
-    border: 1px solid rgb(100, 100, 100);
+    color: var(--hf-text-muted);
+    border: 1px solid var(--hf-border);
     padding-top: 5px;
     padding-left: 5px;
     padding-right: 5px;
@@ -1559,7 +1586,7 @@ fieldset .field {
 }
 
 .overdue-tasks-item {
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
     margin-bottom: 10px;
 }
 
@@ -1569,9 +1596,9 @@ fieldset .field {
     margin-top: 23px;
     margin-bottom: 45px;
     padding: 0 15px 15px 15px;
-    border: 1px solid rgb(43, 43, 43);
-    background-color: rgb(50, 54, 59);
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--hf-border);
+    background-color: var(--hf-surface);
+    box-shadow: var(--hf-shadow);
     border-radius: 4px;
 }
 
@@ -1579,7 +1606,7 @@ fieldset .field {
     margin-top: 10px;
     margin-bottom: 10px;
     font-size: 1.3em;
-    color: rgb(55, 145, 243);
+    color: var(--hf-link);
 }
 
 .log-content {
@@ -1588,16 +1615,16 @@ fieldset .field {
 }
 
 .log-item {
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
     margin-bottom: 10px;
 }
 
 .log-item a {
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
 }
 
 .log-item a:hover {
-    color: rgb(200, 200, 200);
+    color: var(--hf-text);
 }
 
 .log-item strong {
@@ -1613,7 +1640,7 @@ fieldset .field {
 .plant-gallery-title {
     margin-bottom: 20px;
     font-size: 1.5em;
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
 }
 
 .plant-gallery-upload {
@@ -1625,7 +1652,7 @@ fieldset .field {
 }
 
 .plant-gallery-photos strong {
-    color: rgb(100, 100, 100);
+    color: var(--hf-text-faint);
 }
 
 .plant-gallery-item {
@@ -1636,8 +1663,8 @@ fieldset .field {
     margin-left: 10px;
     margin-right: 10px;
     margin-bottom: 30px;
-    background-color: rgba(73, 79, 83);
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background-color: var(--hf-surface);
+    box-shadow: var(--hf-shadow);
     border-radius: 4px;
 }
 
@@ -1647,7 +1674,7 @@ fieldset .field {
 
 .plant-gallery-item-header-label {
     display: inline-block;
-    color: rgb(230, 230, 230);
+    color: var(--hf-text);
 }
 
 .plant-gallery-item-header-action {
@@ -1656,19 +1683,19 @@ fieldset .field {
 }
 
 .plant-gallery-item-header-action svg.is-action-share, .is-action-edit, .is-action-setmain {
-    color: rgb(200, 200, 200);
+    color: var(--hf-text);
 }
 
 .plant-gallery-item-header-action svg.is-action-share:hover, svg.is-action-edit:hover, svg.is-action-setmain:hover {
-    color: rgb(220, 220, 220);
+    color: var(--hf-text);
 }
 
 .plant-gallery-item-header-action svg.is-action-delete {
-    color: rgb(173, 86, 86);
+    color: var(--hf-danger);
 }
 
 .plant-gallery-item-header-action svg.is-action-delete:hover {
-    color: rgb(173, 90, 90);
+    color: var(--hf-danger);
 }
 
 .plant-gallery-item-photo {
@@ -1701,7 +1728,7 @@ fieldset .field {
     position: relative;
     top: -3px;
     padding: 10px;
-    color: rgb(135, 135, 135);
+    color: var(--hf-text-muted);
 }
 
 .plant-tasks {
@@ -1717,7 +1744,7 @@ fieldset .field {
 .plant-tasks-title {
     margin-bottom: 20px;
     font-size: 1.5em;
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
 }
 
 .plant-log {
@@ -1733,7 +1760,7 @@ fieldset .field {
 .plant-log-title {
     margin-bottom: 20px;
     font-size: 1.5em;
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
 }
 
 .plant-log table {
@@ -1741,7 +1768,7 @@ fieldset .field {
 }
 
 .plant-log strong {
-    color: rgb(100, 100, 100);
+    color: var(--hf-text-faint);
 }
 
 .plant-log-action {
@@ -1757,11 +1784,11 @@ fieldset .field {
 }
 
 .plant-log-paginate a {
-    color: rgb(55, 145, 243);
+    color: var(--hf-link);
 }
 
 .plant-log-paginate a:hover {
-    color: rgb(55, 145, 243);
+    color: var(--hf-link);
     text-decoration: underline;
 }
 
@@ -1778,29 +1805,29 @@ fieldset .field {
 .location-log-title {
     margin-bottom: 20px;
     font-size: 1.5em;
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
 }
 
 .location-log table {
     width: 100%;
-    color: rgb(200, 200, 200);
+    color: var(--hf-text);
 }
 
 .location-log table strong {
-    color: rgb(200, 200, 200);
+    color: var(--hf-text);
 }
 
 .location-log thead {
-    background-color: rgba(104, 145, 194, 0.5);
+    background-color: var(--hf-thead);
 }
 
 .location-log table td {
-    border: 1px solid rgb(200, 200, 200);
+    border: 1px solid var(--hf-border);
     padding: 10px;
 }
 
 .location-log strong {
-    color: rgb(100, 100, 100);
+    color: var(--hf-text-faint);
 }
 
 .location-log-action {
@@ -1816,11 +1843,11 @@ fieldset .field {
 }
 
 .location-log-paginate a {
-    color: rgb(55, 145, 243);
+    color: var(--hf-link);
 }
 
 .location-log-paginate a:hover {
-    color: rgb(55, 145, 243);
+    color: var(--hf-link);
     text-decoration: underline;
 }
 
@@ -1837,11 +1864,11 @@ fieldset .field {
 }
 
 .share-log-paginate a {
-    color: rgb(55, 145, 243);
+    color: var(--hf-link);
 }
 
 .share-log-paginate a:hover {
-    color: rgb(55, 145, 243);
+    color: var(--hf-link);
     text-decoration: underline;
 }
 
@@ -1864,20 +1891,20 @@ fieldset .field {
     margin-right: 12px;
     margin-bottom: 20px;
     padding: 20px;
-    background-color: rgb(55, 59, 62);
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background-color: var(--hf-surface);
+    box-shadow: var(--hf-shadow);
     border-radius: 4px;
     border-left: 2px solid rgb(159, 165, 45);
 }
 
 .stats-item-count {
-    color: rgb(250, 250, 250);
+    color: var(--hf-heading);
     font-size: 2.0em;
     text-align: center;
 }
 
 .stats-item-label {
-    color: rgb(200, 200, 200);
+    color: var(--hf-text);
     font-size: 1.4em;
     text-align: center;
 }
@@ -1921,15 +1948,15 @@ fieldset .field {
     margin-right: 5px;
     margin-bottom: 16px;
     text-align: center;
-    background-color: rgba(123, 123, 123, 0.3);
-    color: rgb(190, 190, 190);
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background-color: var(--hf-primary-soft);
+    color: var(--hf-text);
+    box-shadow: var(--hf-shadow);
     border-radius: 10px;
 }
 
 .plant-tags-item a:hover {
-    background-color: rgba(150, 150, 150, 0.5);
-    color: rgb(230, 230, 230);
+    background-color: var(--hf-border);
+    color: var(--hf-text);
 }
 
 .tasks {
@@ -1947,8 +1974,8 @@ fieldset .field {
     margin-left: 10px;
     margin-right: 10px;
     margin-bottom: 29px;
-    background-color: rgb(55, 59, 62);
-    border: 1px solid rgb(80, 80, 80);
+    background-color: var(--hf-surface);
+    border: 1px solid var(--hf-border);
     border-radius: 4px;
 }
 
@@ -1959,18 +1986,18 @@ fieldset .field {
     padding: 10px;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
-    background-color: rgb(25, 25, 25);
+    background-color: var(--hf-surface-sunken);
 }
 
 .task-header-title {
     position: relative;
     display: inline-block;
     font-size: 1.2em;
-    color: rgb(200, 200, 200);
+    color: var(--hf-text);
 }
 
 .task-header-title span {
-    color: rgb(100, 100, 100);
+    color: var(--hf-text-faint);
 }
 
 .task-header-title-dashboard {
@@ -1984,7 +2011,7 @@ fieldset .field {
 }
 
 .task-header-action a {
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
 }
 
 .task-description {
@@ -1993,7 +2020,7 @@ fieldset .field {
     margin-bottom: 43px;
     padding: 10px;
     font-size: 1.0em;
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
     overflow-y: auto;
 }
 
@@ -2005,7 +2032,7 @@ fieldset .field {
 }
 
 .task-description a {
-    color: rgb(111, 185, 235);
+    color: var(--hf-link);
 }
 
 .task-description a:hover {
@@ -2017,7 +2044,7 @@ fieldset .field {
     bottom: 0;
     padding: 10px;
     width: 100%;
-    background-color: rgb(10, 10, 10);
+    background-color: var(--hf-surface-sunken);
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
     font-size: 0.8em;
@@ -2040,11 +2067,11 @@ fieldset .field {
 }
 
 .is-task-overdue {
-    color: rgb(212, 50, 50);
+    color: var(--hf-danger);
 }
 
 .is-task-recurring {
-    color: rgb(55, 145, 243);
+    color: var(--hf-link);
     margin-left: 5px;
 }
 
@@ -2055,7 +2082,7 @@ fieldset .field {
 }
 
 .task-footer-action a {
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
 }
 
 .tasks-all-done {
@@ -2075,12 +2102,12 @@ fieldset .field {
 }
 
 .tasks-all-done-text {
-    color: rgb(120, 215, 105);
+    color: var(--hf-success);
     font-size: 2.0em;
 }
 
 .tasks-all-done-text-small {
-    color: rgb(120, 215, 105);
+    color: var(--hf-success);
     font-size: 1.5em;
 }
 
@@ -2095,8 +2122,8 @@ fieldset .field {
     padding-right: 10px;
     padding-top: 5px;
     padding-bottom: 5px;
-    background-color: rgba(200, 200, 200, 0.76);
-    border: 1px solid rgb(90, 90, 90);
+    background-color: var(--hf-primary-soft);
+    border: 1px solid var(--hf-border);
 }
 
 .inventory-item {
@@ -2106,8 +2133,8 @@ fieldset .field {
     padding-right: 10px;
     padding-top: 5px;
     padding-bottom: 5px;
-    background-color: rgba(50, 50, 50, 0.76);
-    border: 1px solid rgb(90, 90, 90);
+    background-color: var(--hf-surface);
+    border: 1px solid var(--hf-border);
 }
 
 .inventory-item-header {
@@ -2121,15 +2148,15 @@ fieldset .field {
 }
 
 .inventory-item-name span {
-    color: rgb(100, 100, 100);
+    color: var(--hf-text-faint);
 }
 
 .inventory-item-name a {
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
 }
 
 .inventory-item-name a:hover {
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
 }
 
 .inventory-item-amount {
@@ -2138,15 +2165,15 @@ fieldset .field {
 }
 
 .inventory-item-amount svg {
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
 }
 
 .inventory-item-amount span {
-    color: rgb(215, 215, 215);
+    color: var(--hf-text);
 }
 
 .is-inventory-item-empty {
-    color: rgb(212, 50, 50) !important;
+    color: var(--hf-danger) !important;
 }
 
 .inventory-item-actions {
@@ -2156,7 +2183,7 @@ fieldset .field {
 }
 
 .inventory-item-actions svg {
-    color: rgb(100, 100, 100);
+    color: var(--hf-text-faint);
 }
 
 .inventory-item-body {
@@ -2176,7 +2203,7 @@ fieldset .field {
 
 .inventory-item-description {
     position: relative;
-    color: rgb(130, 130, 130);
+    color: var(--hf-text-muted);
     margin-top: 10px;
     margin-bottom: 10px;
 }
@@ -2188,7 +2215,7 @@ fieldset .field {
 }
 
 .inventory-item-description a {
-    color: rgb(111, 185, 235);
+    color: var(--hf-link);
 }
 
 .inventory-item-description a:hover {
@@ -2206,24 +2233,24 @@ fieldset .field {
     padding-left: 10px;
     padding-right: 10px;
     padding-bottom: 1px;
-    background-color: rgb(100, 100, 100);
-    border: 1px solid rgb(200, 200, 200);
+    background-color: var(--hf-surface-sunken);
+    border: 1px solid var(--hf-border);
     border-radius: 5px;
     font-size: 0.75em;
-    color: rgb(250, 250, 250);
+    color: var(--hf-heading);
 }
 
 .inventory-item-tags-tag:hover {
-    background-color: rgb(150, 150, 150);
+    background-color: var(--hf-text-muted);
     color: rgb(255, 255, 255);
 }
 
 .inventory-item-tags-tag a {
-    color: rgb(250, 250, 250);
+    color: var(--hf-heading);
 }
 
 .inventory-item-tags-tag a:hover {
-    color: rgb(250, 250, 250);
+    color: var(--hf-heading);
 }
 
 .inventory-item-photo {
@@ -2234,7 +2261,7 @@ fieldset .field {
 
 .inventory-item-footer {
     position: relative;
-    color: rgb(120, 120, 120);
+    color: var(--hf-text-muted);
     margin-top: 10px;
 }
 
@@ -2254,7 +2281,7 @@ fieldset .field {
 }
 
 .inventory-groups thead td {
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
 }
 
 .inventory-groups thead td:last-child {
@@ -2262,15 +2289,15 @@ fieldset .field {
 }
 
 .inventory-groups.table td {
-    border: 1px solid rgb(100, 100, 100);
+    border: 1px solid var(--hf-border);
 }
 
 .inventory-groups a {
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
 }
 
 .inventory-groups a:hover {
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
     text-decoration: underline;
 }
 
@@ -2294,14 +2321,14 @@ fieldset .field {
 }
 
 .calendar-menu span {
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
 }
 
 .calendar-input {
     padding: 8px;
-    color: rgb(250, 250, 250);
-    background-color: rgb(50, 50, 50);
-    border: 1px solid rgb(100, 100, 100);
+    color: var(--hf-heading);
+    background-color: var(--hf-surface);
+    border: 1px solid var(--hf-border);
     border-radius: 5px;
 }
 
@@ -2314,11 +2341,11 @@ fieldset .field {
     position: relative;
     top: 10px;
     float: right;
-    color: rgb(200, 105, 105);
+    color: var(--hf-danger);
 }
 
 .calendar-link-removal:hover {
-    color: rgb(200, 105, 105);
+    color: var(--hf-danger);
     text-decoration: underline;
 }
 
@@ -2329,7 +2356,7 @@ fieldset .field {
 }
 
 .calendar-view h3 {
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
     font-size: 2.0em;
     padding-bottom: 10px;
 }
@@ -2358,15 +2385,15 @@ fieldset .field {
     padding-left: 10px;
     padding-right: 10px;
     padding-bottom: 10px;
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
     text-align: center;
-    background-color: rgb(100, 100, 100);
+    background-color: var(--hf-surface-sunken);
     border-radius: 5px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: var(--hf-shadow);
 }
 
 .weather-header-item strong {
-    color: rgb(200, 200, 200);
+    color: var(--hf-text);
 }
 
 .weather-day {
@@ -2386,7 +2413,7 @@ fieldset .field {
 
 .weather-day-data-title {
     position: relative;
-    color: rgb(200, 200, 200);
+    color: var(--hf-text);
     font-weight: bold;
 }
 
@@ -2396,11 +2423,11 @@ fieldset .field {
 
 .weather-day-data-attribute {
     position: relative;
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
 }
 
 .is-weather-fill-data {
-    color: rgb(100, 100, 100);
+    color: var(--hf-text-faint);
 }
 
 .chat-message {
@@ -2408,13 +2435,13 @@ fieldset .field {
     width: 90%;
     padding: 15px;
     margin-bottom: 20px;
-    background-color: rgba(200, 200, 200, 0.5);
+    background-color: var(--hf-surface-sunken);
     border-radius: 10px;
 }
 
 .chat-message-right {
     margin-left: 10%;
-    background-color: rgba(115, 143, 100, 0.9);
+    background-color: var(--hf-primary-soft);
 }
 
 .chat-message-user {
@@ -2429,7 +2456,7 @@ fieldset .field {
     display: inline-block;
     background-color: rgb(212, 130, 67);
     border: 1px solid rgb(92, 64, 25);
-    color: rgb(250, 250, 250);
+    color: var(--hf-heading);
     border-radius: 4px;
     padding: 5px;
     font-size: 0.5em;
@@ -2447,7 +2474,7 @@ fieldset .field {
 }
 
 .chat-message-content a {
-    color: rgb(111, 185, 235);
+    color: var(--hf-link);
 }
 
 .chat-message-content a:hover {
@@ -2458,12 +2485,12 @@ fieldset .field {
     position: relative;
     margin-top: 10px;
     font-size: 0.76em;
-    color: rgb(200, 200, 200);
+    color: var(--hf-text);
 }
 
 .chat-typing-indicator {
     display: none;
-    background-color: rgba(50, 50, 50, 0.5);
+    background-color: var(--hf-surface-sunken);
 }
 
 .chat-typing-indicator.visible {
@@ -2474,12 +2501,12 @@ fieldset .field {
     position: relative;
     margin-top: 10px;
     margin-bottom: 23px;
-    color: rgb(92, 255, 0);
+    color: var(--hf-success);
 }
 
 .system-message {
     position: relative;
-    background-color: rgb(205, 202, 165);
+    background-color: var(--hf-warning-soft);
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 20px;
@@ -2526,11 +2553,11 @@ fieldset .field {
 }
 
 .system-message-content a {
-    color: rgb(135, 75, 5);
+    color: var(--hf-warning);
 }
 
 .system-message-content a:hover {
-    color: rgb(135, 75, 5);
+    color: var(--hf-warning);
     text-decoration: underline;
 }
 
@@ -2557,9 +2584,9 @@ fieldset .field {
         width: 100%;
         left: 0;
     }
-    background-color: rgb(205, 202, 165);
+    background-color: var(--hf-warning-soft);
     border-radius: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+    box-shadow: var(--hf-shadow);
     padding: 20px;
     margin-bottom: 10px;
 }
@@ -2572,11 +2599,11 @@ fieldset .field {
 }
 
 .system-message-small-content a {
-    color: rgb(135, 75, 5);
+    color: var(--hf-warning);
 }
 
 .system-message-small-content a:hover {
-    color: rgb(135, 75, 5);
+    color: var(--hf-warning);
     text-decoration: underline;
 }
 
@@ -2588,17 +2615,17 @@ fieldset .field {
 }
 
 .scroll-to-top-inner {
-    background-color: rgb(80, 80, 80);
+    background-color: var(--hf-surface);
     border-radius: 50%;
     padding-top: 12px;
     padding-left: 10px;
     padding-right: 10px;
     padding-bottom: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: var(--hf-shadow);
 }
 
 .scroll-to-top-inner a {
-    color: rgb(200, 200, 200);
+    color: var(--hf-text);
 }
 
 .quickscan {
@@ -2609,13 +2636,13 @@ fieldset .field {
 }
 
 .quickscan-inner {
-    background-color: rgb(115, 155, 105);
+    background-color: var(--hf-primary);
     border-radius: 50%;
     padding-top: 17px;
     padding-left: 18px;
     padding-right: 18px;
     padding-bottom: 17px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: var(--hf-shadow);
 }
 
 .quickscan-inner a {
@@ -2630,13 +2657,13 @@ fieldset .field {
 }
 
 .quick-add-inner {
-    background-color: rgb(102, 195, 83);
+    background-color: var(--hf-primary);
     border-radius: 50%;
     padding-top: 12px;
     padding-left: 10px;
     padding-right: 10px;
     padding-bottom: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: var(--hf-shadow);
 }
 
 .quick-add-inner a {
@@ -2669,10 +2696,10 @@ fieldset .field {
     transform: translate(-50%, -50%);
     text-align: center;
     padding: 20px;
-    background-color: rgba(35, 35, 35);
+    background-color: var(--hf-surface);
     border-radius: 5px;
-    border: 1px solid rgb(41, 41, 41);
-    box-shadow: 0 4px 8px 0 rgba(5, 5, 5, 0.9), 0 6px 20px 0 rgba(5, 5, 5, 0.9);
+    border: 1px solid var(--hf-border);
+    box-shadow: var(--hf-shadow);
 }
 
 .auth-header {
@@ -2694,7 +2721,7 @@ fieldset .field {
     }
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: bold;
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
 }
 
 .auth-info {
@@ -2703,11 +2730,11 @@ fieldset .field {
 }
 
 .auth-info-error {
-    color: rgb(154, 73, 69);
+    color: var(--hf-danger);
 }
 
 .auth-info-success {
-    color: rgb(69, 154, 83);
+    color: var(--hf-success);
 }
 
 .auth-form {
@@ -2715,12 +2742,12 @@ fieldset .field {
 }
 
 .auth-form input[type=email], .auth-form input[type=password] {
-    color: rgb(150, 150, 150);
-    background-color: rgb(50, 50, 50);
+    color: var(--hf-text-muted);
+    background-color: var(--hf-surface);
 }
 
 .auth-form input[type=email]::placeholder, .auth-form input[type=password]::placeholder {
-    color: rgb(100, 100, 100);
+    color: var(--hf-text-faint);
 }
 
 .auth-form input[type=submit] {
@@ -2733,11 +2760,11 @@ fieldset .field {
 }
 
 .auth-help a {
-    color: rgb(54, 105, 203);
+    color: var(--hf-link);
 }
 
 .auth-help a:hover {
-    color: rgb(54, 105, 203);
+    color: var(--hf-link);
     text-decoration: underline;
 }
 
@@ -2767,10 +2794,10 @@ fieldset .field {
     transform: translate(-50%, -50%);
     text-align: center;
     padding: 20px;
-    background-color: rgba(35, 35, 35);
+    background-color: var(--hf-surface);
     border-radius: 5px;
-    border: 1px solid rgb(41, 41, 41);
-    box-shadow: 0 4px 8px 0 rgba(5, 5, 5, 0.9), 0 6px 20px 0 rgba(5, 5, 5, 0.9);
+    border: 1px solid var(--hf-border);
+    box-shadow: var(--hf-shadow);
 }
 
 .reset-content h1 {
@@ -2787,11 +2814,11 @@ fieldset .field {
 }
 
 .reset-info-error {
-    color: rgb(154, 73, 69);
+    color: var(--hf-danger);
 }
 
 .reset-info-success {
-    color: rgb(69, 154, 83);
+    color: var(--hf-success);
 }
 
 .reset-form {
@@ -2799,12 +2826,12 @@ fieldset .field {
 }
 
 .reset-form input[type=email], .reset-form input[type=password] {
-    color: rgb(150, 150, 150);
-    background-color: rgb(50, 50, 50);
+    color: var(--hf-text-muted);
+    background-color: var(--hf-surface);
 }
 
 .reset-form input[type=email]::placeholder, .reset-form input[type=password]::placeholder {
-    color: rgb(100, 100, 100);
+    color: var(--hf-text-faint);
 }
 
 .reset-form input[type=submit] {
@@ -2816,7 +2843,7 @@ fieldset .field {
 }
 
 .preferences-header svg {
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
 }
 
 .profile-shared-photos table {
@@ -2824,34 +2851,34 @@ fieldset .field {
 }
 
 .profile-shared-photos thead {
-    background-color: rgba(104, 145, 194, 0.5);
+    background-color: var(--hf-thead);
 }
 
 .profile-shared-photos thead:hover {
-    background-color: rgba(104, 145, 194, 0.5);
+    background-color: var(--hf-thead);
 }
 
 .profile-shared-photos td {
     padding: 10px;
-    color: rgb(150, 150, 150);
-    border: 1px solid rgb(200, 200, 200);
+    color: var(--hf-text-muted);
+    border: 1px solid var(--hf-border);
 }
 
 .profile-shared-photos td a {
-    color: rgb(111, 143, 225);
+    color: var(--hf-link);
 }
 
 .profile-shared-photos td a:hover {
-    color: rgb(111, 143, 225);
+    color: var(--hf-link);
     text-decoration: underline;
 }
 
 .profile-shared-photos td svg {
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
 }
 
 .profile-shared-photos td svg:hover {
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
 }
 
 .profile-shared-photos td:last-child {
@@ -2860,7 +2887,7 @@ fieldset .field {
 }
 
 .profile-shared-photos svg {
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
 }
 
 .admin-tabs {
@@ -2868,12 +2895,12 @@ fieldset .field {
 }
 
 .admin-tabs a {
-    color: rgb(200, 200, 200);
+    color: var(--hf-text);
 }
 
 .admin-tabs a:hover {
-    color: rgb(230, 230, 230);
-    border-bottom-color: rgb(111, 172, 243);
+    color: var(--hf-text);
+    border-bottom-color: var(--hf-link);
 }
 
 .admin-environment {
@@ -2886,16 +2913,16 @@ fieldset .field {
 }
 
 .admin-environment label, .admin-environment span {
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
 }
 
 .admin-environment input, .admin-environment textarea, .admin-environment select {
-    color: rgb(150, 150, 150);
-    background-color: rgb(50, 50, 50);
+    color: var(--hf-text-muted);
+    background-color: var(--hf-surface);
 }
 
 .admin-environment hr {
-    background-color: rgb(100, 100, 100);
+    background-color: var(--hf-surface-sunken);
 }
 
 .admin-media {
@@ -2909,25 +2936,25 @@ fieldset .field {
 }
 
 .admin-media a {
-    color: rgb(55, 145, 243);
+    color: var(--hf-link);
 }
 
 .admin-media a:hover {
-    color: rgb(55, 145, 243);
+    color: var(--hf-link);
     text-decoration: underline;
 }
 
 .admin-media hr {
-    background-color: rgb(100, 100, 100);
+    background-color: var(--hf-surface-sunken);
 }
 
 .admin-media label {
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
 }
 
 .admin-media input, .admin-backup input {
-    color: rgb(150, 150, 150);
-    background-color: rgb(50, 50, 50);
+    color: var(--hf-text-muted);
+    background-color: var(--hf-surface);
 }
 
 .admin-media input[type=submit] {
@@ -2955,12 +2982,12 @@ fieldset .field {
 }
 
 .admin-user-account label, .admin-user-account span {
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
 }
 
 .admin-user-account input, .admin-user-account select {
-    color: rgb(150, 150, 150);
-    background-color: rgb(50, 50, 50);
+    color: var(--hf-text-muted);
+    background-color: var(--hf-surface);
 }
 
 .admin-user-account-item {
@@ -2989,7 +3016,7 @@ fieldset .field {
 
 .admin-users-created-password {
     position: relative;
-    color: rgb(220, 220, 220);
+    color: var(--hf-text);
     background-color: rgb(180, 103, 0);
     border: 1px solid rgb(245, 185, 105);
     border-radius: 10px;
@@ -2997,7 +3024,7 @@ fieldset .field {
 }
 
 .admin-users-created-password strong {
-    color: rgb(250, 250, 250);
+    color: var(--hf-heading);
 }
 
 .admin-users-actions {
@@ -3025,12 +3052,12 @@ fieldset .field {
 }
 
 .admin-location label, .admin-location span {
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
 }
 
 .admin-location input {
-    color: rgb(150, 150, 150);
-    background-color: rgb(50, 50, 50);
+    color: var(--hf-text-muted);
+    background-color: var(--hf-surface);
 }
 
 .admin-location-item {
@@ -3038,7 +3065,7 @@ fieldset .field {
     display: inline-block;
     margin-left: 5px;
     margin-right: 5px;
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
 }
 
 .admin-location-item-input {
@@ -3077,12 +3104,12 @@ fieldset .field {
 }
 
 .admin-auth label, .admin-auth span {
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
 }
 
 .admin-auth input, .admin-auth textarea {
-    color: rgb(150, 150, 150);
-    background-color: rgb(50, 50, 50);
+    color: var(--hf-text-muted);
+    background-color: var(--hf-surface);
 }
 
 .admin-auth-warning {
@@ -3091,7 +3118,7 @@ fieldset .field {
     padding: 20px;
     margin-top: 30px;
     margin-bottom: 25px;
-    color: rgb(250, 250, 250);
+    color: var(--hf-heading);
     background-color: rgba(202, 102, 102, 0.76);
     border: 1px solid rgb(235, 150, 150);
     border-radius: 5px;
@@ -3103,7 +3130,7 @@ fieldset .field {
     padding: 20px;
     margin-top: 30px;
     margin-bottom: 25px;
-    color: rgb(250, 250, 250);
+    color: var(--hf-heading);
     background-color: rgba(255, 220, 87, 0.5);
     border: 1px solid rgb(255, 220, 87);
     border-radius: 5px;
@@ -3119,12 +3146,12 @@ fieldset .field {
 }
 
 .admin-attribute-schema label, .admin-attribute-schema span {
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
 }
 
 .admin-attribute-schema input, .admin-attribute-schema select {
-    color: rgb(150, 150, 150);
-    background-color: rgb(50, 50, 50);
+    color: var(--hf-text-muted);
+    background-color: var(--hf-surface);
 }
 
 .admin-attribute-schema-item {
@@ -3132,7 +3159,7 @@ fieldset .field {
     display: inline-block;
     margin-left: 5px;
     margin-right: 5px;
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
 }
 
 .admin-attribute-schema-item-input {
@@ -3158,16 +3185,16 @@ fieldset .field {
 }
 
 .admin-attributes {
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
 }
 
 .admin-attributes p {
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
     margin-bottom: 30px;
 }
 
 .admin-attributes hr {
-    background-color: rgb(100, 100, 100);
+    background-color: var(--hf-surface-sunken);
 }
 
 .admin-bulk-commands-list {
@@ -3180,12 +3207,12 @@ fieldset .field {
 }
 
 .admin-bulk-command label, .admin-bulk-command span {
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
 }
 
 .admin-bulk-command input, .admin-bulk-command select {
-    color: rgb(150, 150, 150);
-    background-color: rgb(50, 50, 50);
+    color: var(--hf-text-muted);
+    background-color: var(--hf-surface);
 }
 
 .admin-bulk-command-item {
@@ -3193,7 +3220,7 @@ fieldset .field {
     display: inline-block;
     margin-left: 5px;
     margin-right: 5px;
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
 }
 
 .admin-bulk-command-item-input {
@@ -3243,12 +3270,12 @@ fieldset .field {
 }
 
 .admin-calendar-class label, .admin-calendar-class span {
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
 }
 
 .admin-calendar-class input {
-    color: rgb(150, 150, 150);
-    background-color: rgb(50, 50, 50);
+    color: var(--hf-text-muted);
+    background-color: var(--hf-surface);
 }
 
 .admin-calendar-class-item {
@@ -3290,44 +3317,44 @@ fieldset .field {
 }
 
 .admin-mail label, .admin-mail span {
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
 }
 
 .admin-mail input, .admin-mail select {
-    color: rgb(150, 150, 150);
-    background-color: rgb(50, 50, 50);
+    color: var(--hf-text-muted);
+    background-color: var(--hf-surface);
 }
 
 .admin-mail input:disabled, .admin-mail select:disabled {
-    color: rgb(100, 100, 100);
-    background-color: rgb(55, 55, 55);
+    color: var(--hf-text-faint);
+    background-color: var(--hf-surface-sunken);
 }
 
 .admin-themes p {
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
     margin-bottom: 30px;
     font-size: 1.2em;
 }
 
 .admin-themes hr {
-    background-color: rgb(100, 100, 100);
+    background-color: var(--hf-surface-sunken);
 }
 
 .admin-themes input, .admin-themes select {
-    color: rgb(150, 150, 150);
-    background-color: rgb(50, 50, 50);
+    color: var(--hf-text-muted);
+    background-color: var(--hf-surface);
 }
 
 .admin-themes-result {
     position: relative;
     padding: 10px;
     border-radius: 5px;
-    border: 1px solid rgb(255, 255, 255);
-    background-color: rgb(185, 255, 164);
+    border: 1px solid var(--hf-border);
+    background-color: var(--hf-primary-soft);
 }
 
 .admin-themes-result svg {
-    color: rgb(50, 50, 50);
+    color: var(--hf-text);
 }
 
 .admin-themes-list {
@@ -3339,25 +3366,25 @@ fieldset .field {
 }
 
 .admin-themes-list thead {
-    background-color: rgba(104, 145, 194, 0.5);
+    background-color: var(--hf-thead);
 }
 
 .admin-themes-list thead:hover {
-    background-color: rgba(104, 145, 194, 0.5);
+    background-color: var(--hf-thead);
 }
 
 .admin-themes-list td {
     padding: 10px;
-    color: rgb(150, 150, 150);
-    border: 1px solid rgb(200, 200, 200);
+    color: var(--hf-text-muted);
+    border: 1px solid var(--hf-border);
 }
 
 .admin-themes-list td svg {
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
 }
 
 .admin-themes-list td svg:hover {
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
 }
 
 .admin-theme-list-right {
@@ -3366,45 +3393,45 @@ fieldset .field {
 }
 
 .admin-backup label, .admin-backup span {
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
 }
 
 .admin-backup hr {
-    background-color: rgb(100, 100, 100);
+    background-color: var(--hf-surface-sunken);
 }
 
 .admin-backup-result {
     position: relative;
     padding: 10px;
     border-radius: 5px;
-    border: 1px solid rgb(255, 255, 255);
-    background-color: rgb(185, 255, 164);
+    border: 1px solid var(--hf-border);
+    background-color: var(--hf-primary-soft);
 }
 
 .admin-backup-result svg {
-    color: rgb(50, 50, 50);
+    color: var(--hf-text);
 }
 
 .admin-backup-result a {
-    color: rgb(15, 150, 43);
+    color: var(--hf-success);
 }
 
 .admin-backup-result a:hover {
-    color: rgb(15, 150, 43);
+    color: var(--hf-success);
     text-decoration: underline;
 }
 
 .admin-weather label, .admin-weather span {
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
 }
 
 .admin-weather input, .admin-weather select {
-    color: rgb(150, 150, 150);
-    background-color: rgb(50, 50, 50);
+    color: var(--hf-text-muted);
+    background-color: var(--hf-surface);
 }
 
 .admin-api p {
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
     margin-bottom: 30px;
     font-size: 1.2em;
 }
@@ -3412,28 +3439,28 @@ fieldset .field {
 .admin-api table {
     width: 100%;
     margin-top: 15px;
-    color: rgb(200, 200, 200);
+    color: var(--hf-text);
 }
 
 .admin-api table strong {
-    color: rgb(200, 200, 200);
+    color: var(--hf-text);
 }
 
 .admin-api thead {
-    background-color: rgba(104, 145, 194, 0.5);
+    background-color: var(--hf-thead);
 }
 
 .admin-api table td {
-    border: 1px solid rgb(200, 200, 200);
+    border: 1px solid var(--hf-border);
     padding: 10px;
 }
 
 .admin-api table td a {
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
 }
 
 .admin-api table td a:hover {
-    color: rgb(200, 200, 200);
+    color: var(--hf-text);
 }
 
 .admin-api table td:last-child {
@@ -3446,12 +3473,12 @@ fieldset .field {
 }
 
 .admin-info-version {
-    color: rgb(200, 200, 200);
+    color: var(--hf-text);
     font-size: 1.5em;
 }
 
 .admin-info-version-smaller {
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
     font-size: 0.76em;
 }
 
@@ -3493,11 +3520,11 @@ fieldset .field {
 }
 
 .admin-info-github svg {
-    color: rgb(50, 50, 50);
+    color: var(--hf-text);
 }
 
 .admin-info-github svg:hover {
-    color: rgb(50, 50, 50);
+    color: var(--hf-text);
 }
 
 .admin-info-sponsor {
@@ -3521,11 +3548,11 @@ fieldset .field {
 }
 
 .admin-info-sponsor svg {
-    color: rgb(205, 50, 50);
+    color: var(--hf-danger);
 }
 
 .admin-info-sponsor svg:hover {
-    color: rgb(205, 50, 50);
+    color: var(--hf-danger);
 }
 
 .admin-info-donation {
@@ -3549,11 +3576,11 @@ fieldset .field {
 }
 
 .admin-info-donation svg {
-    color: rgb(90, 67, 10);
+    color: var(--hf-warning);
 }
 
 .admin-info-donation svg:hover {
-    color: rgb(90, 67, 10);
+    color: var(--hf-warning);
 }
 
 .admin-info-support {
@@ -3577,11 +3604,11 @@ fieldset .field {
 }
 
 .admin-info-support svg {
-    color: rgb(235, 235, 235);
+    color: var(--hf-text);
 }
 
 .admin-info-support svg:hover {
-    color: rgb(235, 235, 235);
+    color: var(--hf-text);
 }
 
 .admin-info-extensions {
@@ -3589,37 +3616,37 @@ fieldset .field {
 }
 
 .admin-info-extensions h3 {
-    color: rgb(200, 200, 200);
+    color: var(--hf-text);
     font-size: 1.4em;
     margin-top: 20px;
     margin-bottom: 20px;
 }
 
 .admin-info-extensions a {
-    color: rgb(55, 145, 243);
+    color: var(--hf-link);
 }
 
 .admin-info-extensions a:hover {
-    color: rgb(55, 145, 243);
+    color: var(--hf-link);
     text-decoration: underline;
 }
 
 .admin-info-extensions table {
     width: 100%;
     margin-top: 15px;
-    color: rgb(200, 200, 200);
+    color: var(--hf-text);
 }
 
 .admin-info-extensions table strong {
-    color: rgb(200, 200, 200);
+    color: var(--hf-text);
 }
 
 .admin-info-extensions thead {
-    background-color: rgba(104, 145, 194, 0.5);
+    background-color: var(--hf-thead);
 }
 
 .admin-info-extensions table td {
-    border: 1px solid rgb(200, 200, 200);
+    border: 1px solid var(--hf-border);
     padding: 10px;
 }
 
@@ -3646,19 +3673,19 @@ fieldset .field {
     position: relative;
     padding: 20px;
     margin-top: 30px;
-    color: rgb(250, 250, 250);
-    background-color: rgba(102, 202, 160, 0.76);
-    border: 1px solid rgb(150, 235, 200);
+    color: var(--hf-heading);
+    background-color: var(--hf-primary-soft);
+    border: 1px solid var(--hf-primary);
     border-radius: 10px;
 }
 
 .version-info a {
-    color: rgb(132, 255, 123);
+    color: var(--hf-success);
     font-weight: bold;
 }
 
 .version-info a:hover {
-    color: rgb(132, 255, 123);
+    color: var(--hf-success);
     text-decoration: underline;
 }
 
@@ -3670,7 +3697,7 @@ fieldset .field {
     z-index: 100;
     padding-left: 5px;
     padding-right: 5px;
-    background-color: rgb(30, 30, 30);
+    background-color: var(--hf-surface);
     @media screen and (min-width: 1087px) {
         display: none;
     }
@@ -3693,20 +3720,793 @@ fieldset .field {
     width: 65px;
     height: 50px;
     margin-top: 6px;
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
     text-align: center;
     font-size: 0.8em;
 }
 
 .bottomnav-item a {
-    color: rgb(150, 150, 150);
+    color: var(--hf-text-muted);
 }
 
 .bottomnav-item a:hover {
-    color: rgb(200, 200, 200);
+    color: var(--hf-text);
     text-decoration: none;
 }
 
 .button-margin-left {
     margin-left: 5px;
+}
+/* ============================================================
+   Light theme component overrides
+   Rules below intentionally come last so they win the cascade
+   over the generic mappings above.
+   ============================================================ */
+
+/* --- Top navbar: deep forest green with light text --- */
+.navbar.is-dark {
+    background-color: var(--hf-navbar-bg);
+}
+
+.navbar-item, .navbar-burger, .navbar-link {
+    color: var(--hf-navbar-text);
+}
+
+.navbar-item a {
+    color: var(--hf-navbar-text);
+}
+
+.navbar-item a:hover {
+    color: #ffffff;
+}
+
+a.navbar-item:hover, a.navbar-item.is-active, .navbar-link:hover, .navbar-link.is-active {
+    color: #ffffff !important;
+}
+
+a.navbar-burger:hover {
+    color: #ffffff;
+}
+
+.navbar-dropdown {
+    background-color: var(--hf-navbar-bg);
+    border-top: 2px solid var(--hf-primary);
+}
+
+.navbar-dropdown .navbar-item {
+    color: var(--hf-navbar-text);
+}
+
+@media screen and (max-width: 1087px) {
+    .navbar-menu {
+        background-color: var(--hf-navbar-bg);
+    }
+}
+
+/* --- Text over photo scrims stays light --- */
+.location-title {
+    background-color: rgba(16, 34, 24, 0.72);
+    color: #ffffff;
+}
+
+.location-footer {
+    background-color: rgba(16, 34, 24, 0.72);
+    color: #E3EFE7;
+}
+
+.plant-card-title {
+    background-color: rgba(16, 34, 24, 0.65);
+    color: #ffffff;
+}
+
+.plant-card-title-second {
+    color: #C9D8CE;
+}
+
+.plant-card-options {
+    color: #ffffff;
+}
+
+.plant-photo-overlay {
+    background-color: rgba(16, 34, 24, 0.6);
+    color: #E3EFE7;
+}
+
+.plant-photo-edit svg, .plant-photo-view svg, .plant-photo-share svg, .plant-photo-clear svg {
+    color: #ffffff;
+}
+
+.plant-state-frostbite {
+    color: #5D8CA8;
+}
+
+/* --- Headings --- */
+h1 {
+    color: var(--hf-heading);
+    font-weight: 700;
+}
+
+h2 {
+    color: var(--hf-text-muted);
+}
+
+/* --- Cards get a bit more rounding --- */
+.stats-item, .warning-plants, .overdue-tasks, .task, .log,
+.last-added-or-authored-plants, .plant-gallery-item, .location {
+    border-radius: 12px;
+}
+
+.location {
+    border-radius: 12px;
+    box-shadow: var(--hf-shadow);
+}
+
+.stats-item {
+    border-left: 3px solid var(--hf-primary);
+}
+
+/* --- Bulma modal / form controls on light --- */
+.modal-card-head, .modal-card-foot {
+    background-color: var(--hf-surface-sunken);
+}
+
+.modal-card-body {
+    background-color: var(--hf-surface);
+}
+
+.modal-card-body input, .modal-card-body select, .modal-card-body textarea, .modal-card-body table {
+    background-color: var(--hf-surface);
+    color: var(--hf-text);
+    border: 1px solid var(--hf-border-strong);
+}
+
+.modal-card-body input::placeholder, .modal-card-body textarea::placeholder {
+    color: var(--hf-text-faint);
+}
+
+.button.is-success {
+    background-color: var(--hf-primary);
+}
+
+.button.is-success:hover {
+    background-color: var(--hf-primary-strong);
+}
+
+/* --- Auth screen: white card over the photo --- */
+.auth-content, .reset-content {
+    background-color: var(--hf-surface);
+    border: 1px solid var(--hf-border);
+}
+
+.auth-form input[type=email], .auth-form input[type=password],
+.reset-form input[type=email], .reset-form input[type=password] {
+    color: var(--hf-text);
+    background-color: var(--hf-surface);
+    border: 1px solid var(--hf-border-strong);
+}
+
+.auth-header h1 {
+    color: var(--hf-heading);
+}
+
+/* --- Bottom navigation (mobile): light, modern, active state --- */
+.bottomnav {
+    background-color: var(--hf-surface);
+    border-top: 1px solid var(--hf-border);
+    box-shadow: 0 -2px 12px rgba(27, 43, 34, 0.06);
+    height: 64px;
+}
+
+.bottomnav-items {
+    top: 6px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.bottomnav-item {
+    width: auto;
+    min-width: 56px;
+    margin-top: 0;
+    font-size: 0.72em;
+}
+
+.bottomnav-item a {
+    color: var(--hf-text-muted);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+}
+
+.bottomnav-item a svg {
+    font-size: 1.5em;
+}
+
+.bottomnav-item a:hover, .bottomnav-item a.is-active {
+    color: var(--hf-primary);
+}
+
+.bottomnav-item.is-active a {
+    color: var(--hf-primary);
+    font-weight: 600;
+}
+
+/* --- My Plants view --- */
+.myplants-header {
+    margin-bottom: 12px;
+}
+
+.myplants-header h2 {
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+.myplants-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 22px;
+}
+
+.myplants-filter-chip {
+    padding: 6px 16px;
+    border-radius: 999px;
+    background-color: var(--hf-surface);
+    border: 1px solid var(--hf-border);
+    color: var(--hf-text-muted);
+    font-size: 0.9em;
+    transition: all 0.15s;
+}
+
+.myplants-filter-chip:hover {
+    border-color: var(--hf-primary);
+    color: var(--hf-primary);
+}
+
+.myplants-filter-chip.is-active {
+    background-color: var(--hf-primary);
+    border-color: var(--hf-primary);
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.myplants-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 18px;
+    margin-bottom: 90px;
+    @media screen and (max-width: 552px) {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+}
+
+.myplants-card {
+    display: block;
+    background-color: var(--hf-surface);
+    border: 1px solid var(--hf-border);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: var(--hf-shadow);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.myplants-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(27, 43, 34, 0.14);
+}
+
+.myplants-card-photo {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background-size: cover;
+    background-position: center;
+    background-color: var(--hf-surface-sunken);
+}
+
+.myplants-card-health {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background-color: rgba(255, 255, 255, 0.92);
+    border-radius: 8px;
+    padding: 4px 7px;
+    font-size: 1.05em;
+    box-shadow: var(--hf-shadow);
+}
+
+.myplants-card-body {
+    padding: 12px 14px 14px;
+}
+
+.myplants-card-name {
+    color: var(--hf-heading);
+    font-weight: 700;
+    font-size: 1.02em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.myplants-card-species {
+    color: var(--hf-text-faint);
+    font-style: italic;
+    font-size: 0.8em;
+    margin-top: 1px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.myplants-card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    margin-top: 8px;
+    font-size: 0.78em;
+    color: var(--hf-text-muted);
+}
+
+.myplants-card-watered svg {
+    color: #4A90D9;
+}
+
+.myplants-card-location svg {
+    color: var(--hf-primary);
+}
+
+.myplants-fab {
+    position: fixed;
+    z-index: 102;
+    right: 20px;
+    bottom: 24px;
+    @media screen and (max-width: 1087px) {
+        bottom: 84px; /* clear the mobile bottom nav */
+    }
+}
+
+.myplants-fab a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background-color: var(--hf-primary);
+    color: #ffffff;
+    font-size: 1.45em;
+    box-shadow: 0 4px 16px rgba(27, 67, 50, 0.35);
+    transition: background-color 0.15s, transform 0.15s;
+}
+
+.myplants-fab a:hover {
+    background-color: var(--hf-primary-strong);
+    transform: scale(1.06);
+    color: #ffffff;
+}
+
+/* --- Dashboard quick links --- */
+.quick-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 14px;
+    margin: 18px 0 28px;
+}
+
+.quick-link-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 18px;
+    background-color: var(--hf-surface);
+    border: 1px solid var(--hf-border);
+    border-radius: 14px;
+    box-shadow: var(--hf-shadow);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.quick-link-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(27, 43, 34, 0.14);
+}
+
+.quick-link-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    background-color: var(--hf-primary-soft);
+    color: var(--hf-primary);
+    font-size: 1.25em;
+}
+
+.quick-link-icon-ai {
+    background-color: #EAE4F7;
+    color: #6B4FA5;
+}
+
+.quick-link-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.quick-link-title {
+    color: var(--hf-heading);
+    font-weight: 700;
+    font-size: 1.05em;
+}
+
+.quick-link-hint {
+    color: var(--hf-text-muted);
+    font-size: 0.85em;
+}
+
+.quick-link-arrow {
+    color: var(--hf-text-faint);
+}
+
+/* --- AI Chat --- */
+.ai-chat-shell {
+    min-height: 72vh;
+    background-color: var(--hf-surface);
+    border: 1px solid var(--hf-border);
+    border-radius: 16px;
+    box-shadow: var(--hf-shadow);
+    margin-top: 6px;
+}
+
+.ai-chat-sidebar {
+    border-right: 1px solid var(--hf-border);
+}
+
+.ai-chat-main {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Session list */
+.ai-session-group-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--hf-text-faint);
+    padding: 0.9rem 0.85rem 0.25rem;
+}
+
+.ai-session-item {
+    display: block;
+    padding: 0.6rem 0.85rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.13s;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.88rem;
+    color: var(--hf-text-muted);
+    line-height: 1.4;
+}
+
+.ai-session-item:hover {
+    background: var(--hf-surface-sunken);
+    color: var(--hf-text);
+}
+
+.ai-session-item.is-active {
+    background: var(--hf-primary-soft);
+    color: var(--hf-primary-strong);
+    font-weight: 600;
+}
+
+/* Thread */
+.ai-thread {
+    min-height: 52vh;
+    max-height: 60vh;
+    overflow-y: auto;
+    padding: 1.25rem 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    scroll-behavior: smooth;
+}
+
+.ai-msg-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+}
+
+.ai-msg-row.is-user {
+    flex-direction: row-reverse;
+}
+
+.ai-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.is-user .ai-avatar {
+    background: var(--hf-primary);
+    color: #ffffff;
+}
+
+.is-bot .ai-avatar {
+    background: #EAE4F7;
+    color: #6B4FA5;
+}
+
+.ai-bubble-wrap {
+    max-width: 78%;
+    min-width: 0;
+}
+
+.ai-bubble {
+    padding: 0.8rem 1.05rem;
+    border-radius: 16px;
+    font-size: 0.93rem;
+    line-height: 1.6;
+    overflow-x: auto;
+}
+
+.is-user .ai-bubble {
+    background: var(--hf-primary);
+    color: #ffffff;
+    border-bottom-right-radius: 4px;
+    word-break: break-word;
+}
+
+.is-bot .ai-bubble {
+    background: var(--hf-surface-sunken);
+    color: var(--hf-text);
+    border-bottom-left-radius: 4px;
+}
+
+.ai-msg-time {
+    font-size: 0.68rem;
+    color: var(--hf-text-faint);
+    margin-top: 0.25rem;
+    padding: 0 0.2rem;
+}
+
+.is-user .ai-msg-time {
+    text-align: right;
+}
+
+/* Markdown inside bot bubbles */
+.is-bot .ai-bubble p { margin: 0 0 0.5rem; color: var(--hf-text); }
+.is-bot .ai-bubble p:last-child { margin-bottom: 0; }
+.is-bot .ai-bubble h1, .is-bot .ai-bubble h2, .is-bot .ai-bubble h3 { font-size: 1.05em; font-weight: 700; margin: 0.6rem 0 0.25rem; color: var(--hf-heading); }
+.is-bot .ai-bubble ul, .is-bot .ai-bubble ol { padding-left: 1.25rem; margin: 0.2rem 0 0.45rem; color: var(--hf-text); }
+.is-bot .ai-bubble ul { list-style: disc; }
+.is-bot .ai-bubble li { margin-bottom: 0.15rem; }
+.is-bot .ai-bubble strong { color: var(--hf-heading); font-weight: 700; }
+.is-bot .ai-bubble em { color: var(--hf-primary-strong); }
+.is-bot .ai-bubble code { background: rgba(27, 43, 34, 0.08); color: var(--hf-primary-strong); padding: 0.1em 0.38em; border-radius: 4px; font-size: 0.85em; font-family: monospace; }
+.is-bot .ai-bubble pre { background: rgba(27, 43, 34, 0.06); padding: 0.75rem; border-radius: 8px; overflow-x: auto; margin: 0.45rem 0; }
+.is-bot .ai-bubble pre code { background: none; padding: 0; }
+.is-bot .ai-bubble table { border-collapse: collapse; width: auto; min-width: 100%; margin: 0.45rem 0; font-size: 0.85em; white-space: nowrap; }
+.is-bot .ai-bubble th, .is-bot .ai-bubble td { border: 1px solid var(--hf-border-strong); padding: 0.3rem 0.65rem; color: var(--hf-text); }
+.is-bot .ai-bubble th { background: var(--hf-thead); font-weight: 600; }
+.is-bot .ai-bubble blockquote { border-left: 3px solid var(--hf-primary); margin: 0.4rem 0; padding: 0.25rem 0.75rem; color: var(--hf-text-muted); }
+.is-bot .ai-bubble hr { border: none; border-top: 1px solid var(--hf-border); margin: 0.5rem 0; }
+.is-bot .ai-bubble a { color: var(--hf-link); text-decoration: underline; }
+
+/* Pending action approval card */
+.ai-action-card {
+    margin: 0.1rem 0 0.2rem calc(34px + 0.65rem);
+    max-width: 78%;
+    background: var(--hf-surface);
+    border: 1px solid var(--hf-border);
+    border-left: 3px solid var(--hf-warning);
+    border-radius: 12px;
+    padding: 0.9rem 1rem;
+    box-shadow: var(--hf-shadow);
+}
+
+.ai-action-card.is-approved { border-left-color: var(--hf-success); }
+.ai-action-card.is-rejected { border-left-color: var(--hf-danger); }
+.ai-action-card.is-failed { border-left-color: var(--hf-danger); }
+
+.ai-action-head {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+}
+
+.ai-action-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    background: var(--hf-warning-soft);
+    color: var(--hf-warning);
+    flex-shrink: 0;
+}
+
+.is-approved .ai-action-icon { background: var(--hf-primary-soft); color: var(--hf-success); }
+.is-rejected .ai-action-icon, .is-failed .ai-action-icon { background: #F9E4E1; color: var(--hf-danger); }
+
+.ai-action-summary {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--hf-heading);
+    flex: 1;
+    min-width: 0;
+}
+
+.ai-action-status {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 999px;
+}
+
+.ai-action-status.is-pending { background: var(--hf-warning-soft); color: var(--hf-warning); }
+.ai-action-status.is-approved { background: var(--hf-primary-soft); color: var(--hf-success); }
+.ai-action-status.is-rejected, .ai-action-status.is-failed { background: #F9E4E1; color: var(--hf-danger); }
+
+.ai-action-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin: 0.7rem 0 0.2rem;
+    padding: 0.6rem 0.75rem;
+    background: var(--hf-surface-sunken);
+    border-radius: 8px;
+}
+
+.ai-action-field {
+    display: flex;
+    gap: 0.6rem;
+    font-size: 0.82rem;
+}
+
+.ai-action-field-label {
+    color: var(--hf-text-muted);
+    min-width: 7.5rem;
+}
+
+.ai-action-field-value {
+    color: var(--hf-text);
+    font-weight: 500;
+}
+
+.ai-action-buttons {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+}
+
+.ai-btn-reject {
+    border-color: var(--hf-border-strong);
+    color: var(--hf-text-muted);
+    background: var(--hf-surface);
+}
+
+.ai-btn-reject:hover {
+    border-color: var(--hf-danger);
+    color: var(--hf-danger);
+}
+
+/* Empty state */
+.ai-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 52vh;
+    color: var(--hf-text-faint);
+    gap: 0.6rem;
+    text-align: center;
+}
+
+.ai-empty svg {
+    font-size: 2.6rem;
+    color: var(--hf-primary);
+    opacity: 0.5;
+}
+
+/* Input area */
+.ai-input-area {
+    border-top: 1px solid var(--hf-border);
+    padding-top: 0.85rem;
+    margin-top: 0.5rem;
+}
+
+.ai-input-shell {
+    display: flex;
+    align-items: stretch;
+    background: var(--hf-surface);
+    border: 1px solid var(--hf-border-strong);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.ai-input-shell:focus-within {
+    border-color: var(--hf-primary);
+    box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.12);
+}
+
+.ai-input-shell textarea {
+    flex: 1;
+    border: none;
+    outline: none;
+    resize: none;
+    padding: 0.8rem 1rem;
+    font-size: 0.95rem;
+    font-family: inherit;
+    color: var(--hf-text);
+    background: transparent;
+}
+
+.ai-input-shell textarea::placeholder {
+    color: var(--hf-text-faint);
+}
+
+.ai-send-btn {
+    border: none;
+    cursor: pointer;
+    width: 56px;
+    background: var(--hf-primary);
+    color: #ffffff;
+    font-size: 1rem;
+    transition: background 0.15s;
+}
+
+.ai-send-btn:hover {
+    background: var(--hf-primary-strong);
+}
+
+.ai-send-btn:disabled {
+    opacity: 0.6;
+    cursor: default;
+}
+
+.ai-send-hint {
+    font-size: 0.72rem;
+    color: var(--hf-text-faint);
+    margin-top: 0.35rem;
+}
+
+@media (max-width: 768px) {
+    .ai-chat-sidebar {
+        border-right: 0;
+        border-bottom: 1px solid var(--hf-border);
+        margin-bottom: 0.5rem;
+    }
+    .ai-bubble-wrap { max-width: 90%; }
+    .ai-thread { max-height: 50vh; }
+    .ai-action-card { max-width: 100%; margin-left: 0; }
+}
+
+/* --- AI enrich button (plant details) --- */
+.ai-enrich-button {
+    background: linear-gradient(135deg, #6B4FA5, #2D6A4F);
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.ai-enrich-button:hover {
+    filter: brightness(1.12);
+    color: #ffffff;
 }

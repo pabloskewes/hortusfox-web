@@ -24,6 +24,30 @@ class PlantsController extends BaseController {
 	 * @param Asatru\Controller\ControllerArg $request
 	 * @return Asatru\View\ViewHandler|Asatru\View\RedirectHandler
 	 */
+	/**
+	 * Handles URL: /plants
+	 *
+	 * My Plants: every plant across all locations, optionally filtered
+	 *
+	 * @param Asatru\Controller\ControllerArg $request
+	 * @return Asatru\View\ViewHandler
+	 */
+	public function view_all_plants($request)
+	{
+		$user = UserModel::getAuthUser();
+
+		$location_filter = safe_int($request->params()->query('location', 0));
+
+		$plants = PlantsModel::getAllPlants();
+
+		return parent::view(['content', 'all_plants'], [
+			'user' => $user,
+			'plants' => $plants,
+			'locations' => LocationsModel::getAll(),
+			'location_filter' => $location_filter
+		]);
+	}
+
 	public function plants_from_location($request)
 	{
 		$user = UserModel::getAuthUser();
