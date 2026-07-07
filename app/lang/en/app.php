@@ -161,6 +161,7 @@ return [
 	'ai_chat_empty_state' => 'Start a new conversation about your plants.',
 	'ai_chat_placeholder' => 'Ask HortusFox anything about your plants...',
 	'ai_chat_send_hint' => 'Ctrl+Enter to send',
+	'nav_plants' => 'My Plants',
 	'ai_chat_pending_approval' => 'Pending approval',
 	'ai_chat_approve' => 'Approve',
 	'ai_chat_reject' => 'Reject',

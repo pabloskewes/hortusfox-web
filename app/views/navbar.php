@@ -1,3 +1,8 @@
+<style>
+@media screen and (max-width: 1088px) { .nav-desktop-only { display: none !important; } }
+@media screen and (min-width: 1089px) { .nav-mobile-only { display: none !important; } }
+</style>
+
 <nav class="navbar is-dark {{ ((app('pwa_enable')) ? 'is-fixed-top-pwa' : '') }}" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
         <a class="navbar-item navbar-item-brand is-font-title" href="{{ url('/') }}">
@@ -19,11 +24,25 @@
         <div class="navbar-start"></div>
 
         <div class="navbar-end">
-            <div class="navbar-item">
+            <div class="navbar-item nav-mobile-only">
+                <a href="{{ url('/') }}">
+                    <i class="fas fa-leaf" title="{{ __('app.nav_plants') }}"></i><span class="navbar-item-only-mobile">&nbsp;{{ __('app.nav_plants') }}</span>
+                </a>
+            </div>
+
+            <div class="navbar-item nav-desktop-only">
                 <a class="button is-success" href="javascript:void(0);" onclick="window.addNewPlant();">
                     {{ __('app.add_plant') }}
                 </a>
             </div>
+
+            @if (AiChatConfigModule::isEnabled())
+            <div class="navbar-item">
+                <a href="{{ url('/ai-chat') }}">
+                    <i class="fas fa-seedling" title="{{ __('app.ai_chat') }}"></i><span class="navbar-item-only-mobile">&nbsp;{{ __('app.ai_chat') }}</span>
+                </a>
+            </div>
+            @endif
 
             @if (app('tasks_enable'))
             <div class="navbar-item">
@@ -34,9 +53,9 @@
             @endif
 
             @if (app('inventory_enable'))
-            <div class="navbar-item">
+            <div class="navbar-item nav-desktop-only">
                 <a href="{{ url('/inventory') }}">
-                    <i class="fas fa-warehouse" title="{{ __('app.inventory') }}"></i><span class="navbar-item-only-mobile">&nbsp;{{ __('app.inventory') }}</span>
+                    <i class="fas fa-warehouse" title="{{ __('app.inventory') }}"></i>
                 </a>
             </div>
             @endif
@@ -67,7 +86,6 @@
             <div class="navbar-item">
                 <a href="{{ url('/chat') }}" class="notification-badge">
                     <i class="fas fa-comments" title="{{ __('app.chat') }}"></i><span class="navbar-item-only-mobile">&nbsp;{{ __('app.chat') }}</span>
-                    
                     <span class="notify-badge is-hidden" id="unread-message-count">
                         <span class="notify-badge-count"></span>
                     </span>
@@ -75,14 +93,6 @@
             </div>
             @endif
 
-            @if (AiChatConfigModule::isEnabled())
-            <div class="navbar-item">
-                <a href="{{ url('/ai-chat') }}">
-                    <i class="fas fa-seedling" title="{{ __('app.ai_chat') }}"></i><span class="navbar-item-only-mobile">&nbsp;{{ __('app.ai_chat') }}</span>
-                </a>
-            </div>
-            @endif
-             
             @if (app('history_enable'))
             <div class="navbar-item">
                 <a href="{{ url('/plants/history') }}">

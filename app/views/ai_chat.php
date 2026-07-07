@@ -2,14 +2,11 @@
 .ai-chat-shell { min-height: 72vh; }
 .ai-chat-sidebar { border-right: 1px solid rgba(127,127,127,0.2); }
 
-/* Session list */
-.ai-session-item { display: flex; align-items: center; gap: 0.55rem; padding: 0.65rem 0.75rem; border-radius: 8px; cursor: pointer; transition: background 0.15s; }
-.ai-session-item:hover { background: rgba(127,127,127,0.12); }
-.ai-session-item.is-active { background: rgba(72,199,142,0.18); }
-.ai-session-icon { width: 28px; height: 28px; border-radius: 50%; background: rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; font-size: 0.7rem; flex-shrink: 0; }
-.ai-session-body { overflow: hidden; }
-.ai-session-title { font-weight: 600; font-size: 0.83rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.ai-session-date { font-size: 0.68rem; opacity: 0.5; }
+/* Session list — ChatGPT-style: just the title, full-width, clean */
+.ai-session-item { display: block; padding: 0.6rem 0.85rem; border-radius: 8px; cursor: pointer; transition: background 0.13s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.88rem; color: rgba(255,255,255,0.72); line-height: 1.4; }
+.ai-session-item:hover { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.9); }
+.ai-session-item.is-active { background: rgba(255,255,255,0.1); color: #ffffff; font-weight: 500; }
+.ai-session-group-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.4; padding: 0.9rem 0.85rem 0.25rem; }
 
 /* Thread */
 .ai-thread { min-height: 52vh; max-height: 60vh; overflow-y: auto; padding: 1.25rem 0.75rem; display: flex; flex-direction: column; gap: 0.85rem; scroll-behavior: smooth; }
@@ -236,15 +233,31 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function renderSessions() {
         sessionList.innerHTML = '';
+        const today = new Date(); today.setHours(0,0,0,0);
+        const yesterday = new Date(today); yesterday.setDate(yesterday.getDate()-1);
+        const week = new Date(today); week.setDate(week.getDate()-7);
+
+        let lastGroup = null;
         sessions.forEach(function(s) {
+            const d = s.updated_at ? new Date(s.updated_at.replace(' ','T')) : null;
+            let group = 'Older';
+            if (d) {
+                const dd = new Date(d); dd.setHours(0,0,0,0);
+                if (dd >= today) group = 'Today';
+                else if (dd >= yesterday) group = 'Yesterday';
+                else if (dd >= week) group = 'Last 7 days';
+            }
+            if (group !== lastGroup) {
+                const lbl = document.createElement('div');
+                lbl.className = 'ai-session-group-label';
+                lbl.textContent = group;
+                sessionList.appendChild(lbl);
+                lastGroup = group;
+            }
             const el = document.createElement('div');
             el.className = 'ai-session-item' + (s.id == currentSessionId ? ' is-active' : '');
-            el.innerHTML =
-                '<div class="ai-session-icon"><i class="fas fa-leaf"></i></div>' +
-                '<div class="ai-session-body">' +
-                    '<div class="ai-session-title">' + escHtml(s.title) + '</div>' +
-                    '<div class="ai-session-date">' + escHtml(s.updated_at || '') + '</div>' +
-                '</div>';
+            el.textContent = s.title || 'Chat';
+            el.title = s.title || '';
             el.addEventListener('click', function() {
                 currentSessionId = s.id;
                 renderSessions();
@@ -282,6 +295,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 bubble.textContent = msg.content;
             } else {
                 bubble.innerHTML = md(msg.content || '');
+                bubble.querySelectorAll('strong').forEach(function(el) { el.style.color = '#ffffff'; el.style.fontWeight = '700'; });
+                bubble.querySelectorAll('em').forEach(function(el) { el.style.color = '#c8d8f0'; el.style.fontStyle = 'italic'; });
+                bubble.querySelectorAll('h1,h2,h3').forEach(function(el) { el.style.color = '#ffffff'; });
             }
 
             const time = document.createElement('div');
