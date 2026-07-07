@@ -7,7 +7,7 @@
 
 <div class="myplants-header">
     <h1>{{ __('app.nav_plants') }}</h1>
-    <h2>{{ count($plants) }} {{ strtolower(__('app.plants')) }}</h2>
+    <h2>{{ count($plants) === 1 ? __('app.plant_count_one') : __('app.plant_count', ['count' => count($plants)]) }}</h2>
 </div>
 
 @include('flashmsg.php')

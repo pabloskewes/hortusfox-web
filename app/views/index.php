@@ -26,7 +26,7 @@
 		<div class="quick-link-icon"><i class="fas fa-leaf"></i></div>
 		<div class="quick-link-body">
 			<div class="quick-link-title">{{ __('app.nav_plants') }}</div>
-			<div class="quick-link-hint">{{ __('app.dashboard_plants_hint', ['count' => $stats['plants']]) }}</div>
+			<div class="quick-link-hint">{{ $stats['plants'] === 1 ? __('app.dashboard_plants_hint_one') : __('app.dashboard_plants_hint', ['count' => $stats['plants']]) }}</div>
 		</div>
 		<div class="quick-link-arrow"><i class="fas fa-chevron-right"></i></div>
 	</a>
