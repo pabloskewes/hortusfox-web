@@ -26,5 +26,6 @@ return [
     ['backup:export', 'Export workspace data as a backup archive', 'BackupExportCommand'],
     ['backup:import', 'Import workspace data from a backup archive', 'BackupImportCommand'],
     ['aquashell:config', 'Create config file for AquaShell scripts', 'AquaShellConfigCommand'],
-    ['species:fetch', 'Pre-populate the species info cache for a given scientific name', 'SpeciesFetchCommand']
+    ['species:fetch', 'Pre-populate the species info cache for a given scientific name', 'SpeciesFetchCommand'],
+    ['user:create', 'Create a new user', 'CreateUserCommand']
 ];
